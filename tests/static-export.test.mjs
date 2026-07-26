@@ -37,4 +37,3 @@ test("prefixes routes and assets with the repository path", async () => {
   );
   assert.doesNotMatch(html, /(?:src|href)="\/assets\//i);
 });
-
