@@ -4,6 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
+const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+function assetPath(path: string): string {
+  return `${assetBasePath}${path}`;
+}
+
 type PageName =
   | "home"
   | "about"
@@ -317,7 +323,7 @@ function Home() {
       <section className="home-hero">
         <div className="home-photo">
           <Image
-            src="/assets/hero-night.webp"
+            src={assetPath("/assets/hero-night.webp")}
             alt="学生社团风采节现场合影"
             fill
             priority
@@ -451,7 +457,7 @@ function About() {
         </div>
         <div className="about-hero-image">
           <Image
-            src="/assets/team-room.webp"
+            src={assetPath("/assets/team-room.webp")}
             alt="学生社团管理中心成员合影"
             fill
             priority
@@ -517,7 +523,7 @@ function Departments() {
           <div>
             <div className="detail-image">
               <Image
-                src={current.image}
+                src={assetPath(current.image)}
                 alt={`${current.name}工作与团队照片`}
                 width={1200}
                 height={900}
@@ -576,7 +582,7 @@ function Departments() {
         <aside className="department-preview" aria-live="polite">
           <div className="department-preview-image">
             <Image
-              src={current.image}
+              src={assetPath(current.image)}
               alt={`${current.name}预览`}
               width={1000}
               height={1250}
@@ -609,7 +615,7 @@ function Events() {
         <div className="event-photo">
           <Image
             key={event.image}
-            src={event.image}
+            src={assetPath(event.image)}
             alt={`${event.name}活动现场`}
             fill
             priority
@@ -717,7 +723,7 @@ function Archive() {
             aria-label={`打开大图：${item.title}`}
           >
             <Image
-              src={item.image}
+              src={assetPath(item.image)}
               alt={item.title}
               width={1200}
               height={900}
@@ -753,7 +759,7 @@ function Archive() {
           </div>
           <div className="lightbox-image">
             <Image
-              src={activeItem.image}
+              src={assetPath(activeItem.image)}
               alt={activeItem.title}
               width={1800}
               height={1200}
@@ -813,7 +819,7 @@ function Join() {
         <div className="join-card">
           <h2>WECHAT / 公众号</h2>
           <Image
-            src="/assets/wechat-qr.jpg"
+            src={assetPath("/assets/wechat-qr.jpg")}
             alt="浙江工商大学学生社团管理中心微信公众号二维码"
             width={640}
             height={640}

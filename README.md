@@ -56,6 +56,19 @@ npx.cmd vinext build
 
 项目使用 vinext 构建为 Cloudflare Worker 兼容产物，并通过 Sites 保存版本和部署。
 
+项目也支持 GitHub Pages 静态部署：
+
+```powershell
+$env:PAGES_BUILD="true"
+$env:NEXT_PUBLIC_BASE_PATH="/zjsu-sg"
+$env:NEXT_PUBLIC_SITE_URL="https://fshfish88-lab.github.io/zjsu-sg"
+npm.cmd run build:pages
+npm.cmd run test:pages
+```
+
+推送到 `main` 后，`.github/workflows/deploy-pages.yml` 会自动构建并发布
+`out/`，网址为 `https://fshfish88-lab.github.io/zjsu-sg/`。
+
 ## 项目分类
 
 - `outputs/`：面向交付的说明文件
