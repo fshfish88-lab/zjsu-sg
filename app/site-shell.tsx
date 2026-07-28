@@ -25,6 +25,8 @@ type Department = {
   description: string[];
   image: string;
   imageCaption: string;
+  previewPosition?: string;
+  detailPosition?: string;
   keywords: string[];
   responsibilities: {
     title: string;
@@ -72,7 +74,9 @@ const departments: Department[] = [
       "对外负责全校社团的干部干事考核、社团行事历收集，以及以财务制度为中心，为全校社团解决财务报销等事宜；同时，协助召开新社团成立答辩会与社长大会。",
     ],
     image: "/assets/dept-general-affairs.webp",
-    imageCaption: "WORK SCENE / 新社团成立答辩与工作交流",
+    imageCaption: "WORK SCENE / 综合事务部工作总结",
+    previewPosition: "12% 50%",
+    detailPosition: "25% 50%",
     keywords: ["ORDER", "SERVICE", "COORDINATE"],
     responsibilities: [
       {
@@ -167,7 +171,9 @@ const departments: Department[] = [
       "我们不止是冰冷的审核者，更是社团成长的见证者与赋能者。",
     ],
     image: "/assets/dept-quality-review.webp",
-    imageCaption: "REVIEW SCENE / 社团项目评审工作现场",
+    imageCaption: "WORK SCENE / 精品建设部工作总结",
+    previewPosition: "12% 50%",
+    detailPosition: "25% 50%",
     keywords: ["QUALITY", "GROWTH", "REVIEW"],
     responsibilities: [
       {
@@ -199,7 +205,8 @@ const departments: Department[] = [
       "不止于此，我们还是校园活动的“记录者”与“设计师”：为社团风采节、社团文化节等年度盛会拍摄照片、剪辑视频，定格青春瞬间，用创意点亮每一次活动。",
     ],
     image: "/assets/dept-media-story.webp",
-    imageCaption: "LIVE SCENE / 社团风采节现场记录",
+    imageCaption: "WELCOME SCENE / 传媒运营部纳新准备",
+    detailPosition: "50% 43%",
     keywords: ["MEDIA", "STORY", "DESIGN"],
     responsibilities: [
       {
@@ -285,7 +292,7 @@ const events: EventItem[] = [
     name: "星级社团评定",
     en: "STAR CLUB REVIEW",
     date: "ANNUAL / REVIEW",
-    image: "/assets/training-stage.webp",
+    image: "/assets/star-club-review.webp",
     description:
       "围绕规范运营、活动质量与文化影响力开展年度评价，挖掘认真耕耘的优秀社团，也为持续成长提供清晰方向。",
   },
@@ -293,7 +300,7 @@ const events: EventItem[] = [
     name: "年度总结",
     en: "ANNUAL ASSEMBLY",
     date: "2025 / YEAR END",
-    image: "/assets/team-awards.webp",
+    image: "/assets/training-stage.webp",
     description:
       "回望一年的协作、服务与创造。我们把重要节点整理成档案，也把每一份并肩努力留给下一段旅程。",
   },
@@ -344,7 +351,7 @@ const archive: Record<string, ArchiveItem[]> = {
       date: "2025 / MEETING",
     },
     {
-      image: "/assets/team-awards.webp",
+      image: "/assets/team-honors.webp",
       title: "荣誉时刻",
       date: "2025 / CEREMONY",
     },
@@ -712,6 +719,7 @@ function Departments() {
                 width={1200}
                 height={900}
                 sizes="(max-width: 800px) 100vw, 50vw"
+                style={{ objectPosition: current.detailPosition }}
               />
             </div>
             <p className="detail-caption">{current.imageCaption}</p>
@@ -780,6 +788,7 @@ function Departments() {
               width={1000}
               height={1250}
               sizes="(max-width: 800px) 100vw, 42vw"
+              style={{ objectPosition: current.previewPosition }}
             />
           </div>
           <div className="department-preview-meta">

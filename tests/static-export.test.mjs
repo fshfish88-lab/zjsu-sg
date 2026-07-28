@@ -65,6 +65,23 @@ test("keeps each department paired with a relevant recruitment or work photo", a
   }
 });
 
+test("keeps review, annual assembly, and honor archive photos semantically paired", async () => {
+  const source = await readSiteShell();
+
+  assert.match(
+    source,
+    /name: "星级社团评定"[\s\S]*?image: "\/assets\/star-club-review\.webp"/,
+  );
+  assert.match(
+    source,
+    /name: "年度总结"[\s\S]*?image: "\/assets\/training-stage\.webp"/,
+  );
+  assert.match(
+    source,
+    /image: "\/assets\/team-honors\.webp"[\s\S]*?title: "荣誉时刻"/,
+  );
+});
+
 test("includes the detailed recruitment-push content hierarchy", async () => {
   const source = await readSiteShell();
 
