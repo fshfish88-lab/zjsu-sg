@@ -15,6 +15,10 @@ async function readExport(relativePath) {
   return readFile(new URL(`../out/${relativePath}`, import.meta.url), "utf8");
 }
 
+async function readSiteShell() {
+  return readFile(new URL("../app/site-shell.tsx", import.meta.url), "utf8");
+}
+
 test("exports every primary route for GitHub Pages", async () => {
   for (const [relativePath, englishText, chineseText] of routes) {
     const html = await readExport(relativePath);
@@ -30,10 +34,33 @@ test("prefixes routes and assets with the repository path", async () => {
 
   assert.match(html, /href="\/zjsu-sg\/about\/"/i);
   assert.match(html, /src="\/zjsu-sg\/assets\/hero-night\.webp"/i);
+  assert.match(html, /src="\/zjsu-sg\/assets\/scmc-mark\.png"/i);
   assert.match(html, /href="\/zjsu-sg\/_next\//i);
   assert.match(
     html,
     /property="og:image" content="https:\/\/fshfish88-lab\.github\.io\/zjsu-sg\/og\.png"/i,
   );
   assert.doesNotMatch(html, /(?:src|href)="\/assets\//i);
+});
+
+test("keeps each department paired with its official recruitment photo", async () => {
+  const source = await readSiteShell();
+  const expectedPairs = [
+    ["综合事务部", "team-night.webp"],
+    ["对外拓展部", "team-outdoor.webp"],
+    ["活动策划部", "team-celebration.webp"],
+    ["精品建设部", "team-annual.webp"],
+    ["传媒运营部", "team-conference.webp"],
+    ["人力资源部", "team-awards.webp"],
+  ];
+
+  for (const [department, image] of expectedPairs) {
+    assert.match(
+      source,
+      new RegExp(
+        `name: "${department}"[\\s\\S]*?image: "/assets/${image.replace(".", "\\.")}"`,
+      ),
+      department,
+    );
+  }
 });

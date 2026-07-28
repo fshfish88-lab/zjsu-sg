@@ -64,7 +64,7 @@ const departments: Department[] = [
     slogan: "让每一次运转，都准确而有序。",
     description:
       "综合事务部对内保障经费报销、换届文件整理和工作衔接，对外统筹社团干部干事考核、行事历收集及财务制度服务，并协助新社团成立答辩会与社长大会。",
-    image: "/assets/team-conference.webp",
+    image: "/assets/team-night.webp",
     keywords: ["ORDER", "SERVICE", "COORDINATE"],
     responsibilities: ["经费与财务服务", "文件与行事历管理", "社团考核", "会议与答辩支持"],
   },
@@ -84,7 +84,7 @@ const departments: Department[] = [
     slogan: "把天马行空，变成真实现场。",
     description:
       "活动策划部全程推动社团风采节、社团文化节与百团大战等校园活动，从创意构思、筹备执行到复盘总结，让想法在协作中落地。",
-    image: "/assets/showcase-stage.webp",
+    image: "/assets/team-celebration.webp",
     keywords: ["IDEA", "ACTION", "STAGE"],
     responsibilities: ["活动创意策划", "流程与现场统筹", "资源协调", "活动复盘"],
   },
@@ -94,7 +94,7 @@ const departments: Department[] = [
     slogan: "在规范与创新之间，陪伴社团成长。",
     description:
       "精品建设部搭建社团管理评价体系，统筹星级社团、七星社长与七星指导教师评选，负责年审注册与精品活动立项培育，是社团成长的见证者与赋能者。",
-    image: "/assets/training-stage.webp",
+    image: "/assets/team-annual.webp",
     keywords: ["QUALITY", "GROWTH", "REVIEW"],
     responsibilities: ["年审注册", "荣誉评选", "精品活动立项", "项目跟进培育"],
   },
@@ -104,7 +104,7 @@ const departments: Department[] = [
     slogan: "记录现场，也设计被记住的方式。",
     description:
       "传媒运营部整合社团动态，运营微信公众号并完成推送排版；同时以摄影、视频与视觉设计记录校园活动，让每一段青春被看见、被记住。",
-    image: "/assets/team-night.webp",
+    image: "/assets/team-conference.webp",
     keywords: ["MEDIA", "STORY", "DESIGN"],
     responsibilities: ["公众号运营", "视觉排版设计", "摄影摄像", "视频剪辑"],
   },
@@ -114,7 +114,7 @@ const departments: Department[] = [
     slogan: "连接成员，陪伴成长。",
     description:
       "人力资源部负责中心人员统筹、内部会议、招新与大型活动人力安排，也承担成员考核、团建和工作记录，在协作中凝聚团队。",
-    image: "/assets/team-room.webp",
+    image: "/assets/team-awards.webp",
     keywords: ["PEOPLE", "CULTURE", "GROWTH"],
     responsibilities: ["人员统筹", "招新与考核", "会议组织", "团队建设"],
   },
@@ -243,15 +243,17 @@ function Header({
     <>
       <header className="topbar">
         <Link className="brand-link" href="/" aria-label="返回首页">
-          <span className="brand-mark" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-            <span />
-          </span>
+          <Image
+            className="brand-mark"
+            src={assetPath("/assets/scmc-mark.png")}
+            alt=""
+            width={512}
+            height={512}
+            priority
+          />
           <span className="brand-copy">
             <strong>浙江工商大学学生社团管理中心</strong>
-            <small>Student Club Management Center</small>
+            <small>Zhejiang Gongshang University Administrative Center of Students’ Associations</small>
           </span>
         </Link>
         <nav className="desktop-nav" aria-label="主导航">
