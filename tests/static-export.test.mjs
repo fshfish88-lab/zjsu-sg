@@ -43,15 +43,15 @@ test("prefixes routes and assets with the repository path", async () => {
   assert.doesNotMatch(html, /(?:src|href)="\/assets\//i);
 });
 
-test("keeps each department paired with its official recruitment photo", async () => {
+test("keeps each department paired with a relevant recruitment or work photo", async () => {
   const source = await readSiteShell();
   const expectedPairs = [
-    ["综合事务部", "team-night.webp"],
+    ["综合事务部", "dept-general-affairs.webp"],
     ["对外拓展部", "team-outdoor.webp"],
-    ["活动策划部", "team-celebration.webp"],
-    ["精品建设部", "team-annual.webp"],
-    ["传媒运营部", "team-conference.webp"],
-    ["人力资源部", "team-awards.webp"],
+    ["活动策划部", "dept-event-planning.webp"],
+    ["精品建设部", "dept-quality-review.webp"],
+    ["传媒运营部", "dept-media-story.webp"],
+    ["人力资源部", "training-stage.webp"],
   ];
 
   for (const [department, image] of expectedPairs) {
@@ -63,4 +63,14 @@ test("keeps each department paired with its official recruitment photo", async (
       department,
     );
   }
+});
+
+test("includes the detailed recruitment-push content hierarchy", async () => {
+  const source = await readSiteShell();
+
+  assert.match(source, /作为八大校级学生组织之一/);
+  assert.match(source, /为你用心在此/);
+  assert.match(source, /部门组织架构/);
+  assert.match(source, /WHAT YOU GAIN \/ 成长收获/);
+  assert.match(source, /社团成长的见证者与赋能者/);
 });

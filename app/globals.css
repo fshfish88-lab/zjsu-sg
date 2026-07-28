@@ -482,6 +482,23 @@ img {
   line-height: 0.86;
 }
 
+.about-copy-stack {
+  border-top: 1px solid var(--ink);
+}
+
+.about-copy-block {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.34fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 64px);
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.about-copy-block .section-label,
+.about-copy-block .body-copy {
+  margin: 0;
+}
+
 .function-list {
   border-top: 1px solid var(--ink);
 }
@@ -527,6 +544,83 @@ img {
 
 .value-cell span {
   color: var(--muted);
+}
+
+.structure-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-left: 1px solid var(--ink);
+}
+
+.structure-cell {
+  display: grid;
+  min-height: 126px;
+  grid-template-columns: 34px 1fr;
+  gap: 8px 14px;
+  align-content: center;
+  padding: 20px;
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.structure-cell span {
+  grid-row: 1 / span 2;
+  color: var(--red);
+  font-size: 10px;
+}
+
+.structure-cell strong {
+  font-size: clamp(17px, 2vw, 25px);
+}
+
+.structure-cell small {
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+
+.about-photo-rail {
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr 0.88fr;
+  gap: 18px;
+  margin-top: clamp(72px, 10vw, 140px);
+  padding-top: 18px;
+  border-top: 1px solid var(--ink);
+}
+
+.about-photo-card {
+  margin: 0;
+}
+
+.about-photo-card div {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.about-photo-card:first-child div {
+  aspect-ratio: 16 / 9;
+}
+
+.about-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-photo-card figcaption {
+  padding-top: 10px;
+  border-top: 6px solid var(--yellow);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.about-photo-card:nth-child(2) figcaption {
+  border-top-color: var(--blue);
+}
+
+.about-photo-card:nth-child(3) figcaption {
+  border-top-color: var(--red);
 }
 
 /* Departments */
@@ -653,6 +747,15 @@ img {
   font-weight: 700;
 }
 
+.department-copy {
+  display: grid;
+  gap: 18px;
+}
+
+.department-copy .body-copy {
+  margin: 0;
+}
+
 .keyword-row {
   display: flex;
   flex-wrap: wrap;
@@ -679,6 +782,14 @@ img {
   object-fit: cover;
 }
 
+.detail-caption {
+  margin: 0;
+  padding: 12px 0 0;
+  border-top: 8px solid var(--yellow);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
 .responsibility-list {
   margin-top: 40px;
   border-top: 1px solid var(--ink);
@@ -686,7 +797,8 @@ img {
 
 .responsibility-list li {
   display: grid;
-  grid-template-columns: 44px 1fr;
+  grid-template-columns: 44px minmax(140px, 0.52fr) minmax(0, 1fr);
+  gap: 16px;
   padding: 17px 0;
   border-bottom: 1px solid var(--line);
   list-style: none;
@@ -695,6 +807,37 @@ img {
 .responsibility-list span {
   color: var(--blue);
   font-size: 10px;
+}
+
+.responsibility-list p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.department-growth {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(40px, 8vw, 130px);
+  margin-top: clamp(70px, 10vw, 140px);
+  padding: clamp(30px, 5vw, 62px) 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.department-growth div > span {
+  display: block;
+  margin-top: 12px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.department-growth > p {
+  max-width: 850px;
+  margin: 0;
+  font-size: clamp(18px, 2.2vw, 28px);
+  line-height: 1.72;
 }
 
 /* Events */
@@ -1143,6 +1286,19 @@ img {
     gap: 42px;
   }
 
+  .about-copy-block {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .about-photo-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-photo-card:first-child {
+    grid-column: 1 / -1;
+  }
+
   .function-row {
     grid-template-columns: 38px 1fr;
   }
@@ -1162,6 +1318,19 @@ img {
 
   .department-detail h1 {
     font-size: clamp(46px, 14vw, 92px);
+  }
+
+  .responsibility-list li {
+    grid-template-columns: 38px 1fr;
+  }
+
+  .responsibility-list p {
+    grid-column: 2;
+  }
+
+  .department-growth {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .event-photo {
@@ -1236,6 +1405,15 @@ img {
 
   .values-grid {
     grid-template-columns: 1fr;
+  }
+
+  .structure-grid,
+  .about-photo-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .about-photo-card:first-child {
+    grid-column: auto;
   }
 
   .department-row {
