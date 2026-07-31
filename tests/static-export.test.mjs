@@ -46,12 +46,12 @@ test("prefixes routes and assets with the repository path", async () => {
 test("keeps each department paired with a relevant recruitment or work photo", async () => {
   const source = await readSiteShell();
   const expectedPairs = [
-    ["综合事务部", "dept-general-affairs.webp"],
+    ["综合事务部", "team-night.webp"],
     ["对外拓展部", "team-outdoor.webp"],
-    ["活动策划部", "dept-event-planning.webp"],
-    ["精品建设部", "dept-quality-review.webp"],
+    ["活动策划部", "team-celebration.webp"],
+    ["精品建设部", "team-annual.webp"],
     ["传媒运营部", "dept-media-story.webp"],
-    ["人力资源部", "training-stage.webp"],
+    ["人力资源部", "team-awards.webp"],
   ];
 
   for (const [department, image] of expectedPairs) {
@@ -61,6 +61,28 @@ test("keeps each department paired with a relevant recruitment or work photo", a
         `name: "${department}"[\\s\\S]*?image: "/assets/${image.replace(".", "\\.")}"`,
       ),
       department,
+    );
+  }
+});
+
+test("expands the official campus work overview with six matching photo stories", async () => {
+  const source = await readSiteShell();
+  const expectedActivities = [
+    ["百团大战", "club-fair.webp"],
+    ["社团风采节", "showcase-stage.webp"],
+    ["社团文化节", "culture-festival.webp"],
+    ["社团星级评定", "star-club-review.webp"],
+    ["精品活动立项", "project-review.webp"],
+    ["七星社长评选", "team-honors.webp"],
+  ];
+
+  for (const [activity, image] of expectedActivities) {
+    assert.match(
+      source,
+      new RegExp(
+        `name: "${activity}"[\\s\\S]*?image: "/assets/${image.replace(".", "\\.")}"`,
+      ),
+      activity,
     );
   }
 });

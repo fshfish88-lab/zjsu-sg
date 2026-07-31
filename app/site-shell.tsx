@@ -73,10 +73,8 @@ const departments: Department[] = [
       "综合事务部是学生社团管理中心里的一个综合性部门，对内主要负责社管经费报销、换届文件整理等，致力于保障社管工作的连续性和活动的顺利开展。",
       "对外负责全校社团的干部干事考核、社团行事历收集，以及以财务制度为中心，为全校社团解决财务报销等事宜；同时，协助召开新社团成立答辩会与社长大会。",
     ],
-    image: "/assets/dept-general-affairs.webp",
-    imageCaption: "WORK SCENE / 综合事务部工作总结",
-    previewPosition: "12% 50%",
-    detailPosition: "25% 50%",
+    image: "/assets/team-night.webp",
+    imageCaption: "TEAM SCENE / 综合事务部合照",
     keywords: ["ORDER", "SERVICE", "COORDINATE"],
     responsibilities: [
       {
@@ -138,8 +136,8 @@ const departments: Department[] = [
     description: [
       "活动策划部是校园大型活动的核心推动者，无论是社团风采节、社团文化节，还是百团大战等标志性活动，从最初的创意构思到细致的筹备安排，从活动现场的统筹执行到结束后的复盘总结，每个环节都活跃着策划部成员的身影。",
     ],
-    image: "/assets/dept-event-planning.webp",
-    imageCaption: "EVENT SCENE / 社团文化节现场",
+    image: "/assets/team-celebration.webp",
+    imageCaption: "TEAM SCENE / 活动策划部合照",
     keywords: ["IDEA", "ACTION", "STAGE"],
     responsibilities: [
       {
@@ -170,10 +168,8 @@ const departments: Department[] = [
       "作为学生社团管理中心的重要职能部门，精建部紧密连接全校社团，立足校园文化建设与社团提质发展两大核心方向。",
       "我们不止是冰冷的审核者，更是社团成长的见证者与赋能者。",
     ],
-    image: "/assets/dept-quality-review.webp",
-    imageCaption: "WORK SCENE / 精品建设部工作总结",
-    previewPosition: "12% 50%",
-    detailPosition: "25% 50%",
+    image: "/assets/team-annual.webp",
+    imageCaption: "TEAM SCENE / 精品建设部合照",
     keywords: ["QUALITY", "GROWTH", "REVIEW"],
     responsibilities: [
       {
@@ -237,8 +233,8 @@ const departments: Department[] = [
       "人力资源部是校级八大组织之一学生社团管理中心的一个人员统筹部门，对内负责统筹社团管理中心人员调配。",
       "作为活动开展的“幕后调度员”，人力资源部全程深度参与社管各类大型活动的筹备与执行，在协调人力、凝聚团队中发挥关键的作用。",
     ],
-    image: "/assets/training-stage.webp",
-    imageCaption: "MEETING SCENE / 学生社团管理中心总结大会",
+    image: "/assets/team-awards.webp",
+    imageCaption: "TEAM SCENE / 人力资源部合照",
     keywords: ["PEOPLE", "CULTURE", "GROWTH"],
     responsibilities: [
       {
@@ -372,6 +368,51 @@ const archive: Record<string, ArchiveItem[]> = {
     },
   ],
 };
+
+const aboutActivities = [
+  {
+    name: "百团大战",
+    en: "CLUB FAIR",
+    image: "/assets/club-fair.webp",
+    description:
+      "百余个学生社团集中亮相，通过展位展示、互动体验和现场交流，让新生快速认识校园社团、找到兴趣伙伴。",
+  },
+  {
+    name: "社团风采节",
+    en: "CLUB SHOWCASE",
+    image: "/assets/showcase-stage.webp",
+    description:
+      "以舞台展演集中呈现社团年度成果，歌舞、戏剧与传统文化等多种节目在同一舞台交汇，展现社团青春风采。",
+  },
+  {
+    name: "社团文化节",
+    en: "CULTURE FESTIVAL",
+    image: "/assets/culture-festival.webp",
+    description:
+      "以主题市集、社团体验和创意互动连接校园文化，让同学在参与中走近社团、感受多元文化。",
+  },
+  {
+    name: "社团星级评定",
+    en: "STAR CLUB REVIEW",
+    image: "/assets/star-club-review.webp",
+    description:
+      "经社团自主申报、材料审核和现场评审，结合规范运营、活动质量与文化影响力形成年度评价，为社团成长提供清晰方向。",
+  },
+  {
+    name: "精品活动立项",
+    en: "QUALITY PROJECTS",
+    image: "/assets/project-review.webp",
+    description:
+      "通过项目申报、评审和跟进培育，为高质量社团文化活动提供支持，推动特色项目沉淀为校园文化品牌。",
+  },
+  {
+    name: "七星社长评选",
+    en: "LEADERSHIP HONORS",
+    image: "/assets/team-honors.webp",
+    description:
+      "面向优秀社团负责人开展荣誉评选，关注组织建设、项目成果与示范作用，发现并展示有担当的社团骨干。",
+  },
+];
 
 function Header({
   page,
@@ -558,23 +599,28 @@ function About() {
           <div className="about-copy-block">
             <p className="section-label">大型活动举办 / CAMPUS EVENTS</p>
             <p className="body-copy">
-              每年，我们都会举办一系列集中展示全校社团风采的活动。百团大战、社团风采节、社团文化节等等，这些精彩纷呈的活动都为同学们提供了展示自我才艺和交流学习的平台。
+              学生社团管理中心每年定期举办百团纳新、社团风采节、社团文化节等品牌活动，同时开展星级社团评定、精品活动立项和七星社长评选，以展示社团成果、培育文化品牌、支持社团持续成长。
             </p>
           </div>
           <div className="function-list">
-            {[
-              ["百团大战", "全校社团集中展示"],
-              ["社团风采节", "校园社团风采展示"],
-              ["社团文化节", "社团文化交流平台"],
-              ["社团星级评定", "激励社团创新发展"],
-              ["精品活动立项", "培育社团特色项目"],
-              ["七星社长评选", "发现优秀社团骨干"],
-            ].map(([title, text], index) => (
-              <div className="function-row" key={title}>
+            {aboutActivities.map((activity, index) => (
+              <article className="function-row" key={activity.name}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{title}</strong>
-                <p>{text}</p>
-              </div>
+                <div className="function-row-title">
+                  <strong>{activity.name}</strong>
+                  <small>{activity.en}</small>
+                </div>
+                <p>{activity.description}</p>
+                <div className="function-row-image">
+                  <Image
+                    src={assetPath(activity.image)}
+                    alt={`${activity.name}现场`}
+                    width={720}
+                    height={480}
+                    sizes="(max-width: 800px) 100vw, 18vw"
+                  />
+                </div>
+              </article>
             ))}
           </div>
         </div>
@@ -654,7 +700,7 @@ function About() {
       <section className="about-photo-rail" aria-label="学生社团管理中心工作现场">
         {[
           ["/assets/club-fair.webp", "01 / 百团大战"],
-          ["/assets/dept-quality-review.webp", "02 / 社团工作现场"],
+          ["/assets/star-club-review.webp", "02 / 社团评审现场"],
           ["/assets/showcase-stage.webp", "03 / 社团风采节"],
         ].map(([image, caption]) => (
           <figure className="about-photo-card" key={image}>
