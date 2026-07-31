@@ -54,6 +54,13 @@ type ArchiveItem = {
   date: string;
 };
 
+type HomeSlide = {
+  image: string;
+  alt: string;
+  title: string;
+  meta: string;
+};
+
 const navItems: { page: PageName; label: string; href: string; num: string }[] =
   [
     { page: "home", label: "Home", href: "/", num: "00" },
@@ -68,6 +75,39 @@ const navItems: { page: PageName; label: string; href: string; num: string }[] =
     { page: "archive", label: "Archive", href: "/archive", num: "04" },
     { page: "join", label: "Join", href: "/join", num: "05" },
   ];
+
+const homeSlides: HomeSlide[] = [
+  {
+    image: "/assets/hero-night.webp",
+    alt: "学生社团风采节现场合影",
+    title: "社团风采节",
+    meta: "CAMPUS ARCHIVE / 001",
+  },
+  {
+    image: "/assets/club-fair.webp",
+    alt: "百团大战社团招新现场",
+    title: "百团大战",
+    meta: "CAMPUS ARCHIVE / 002",
+  },
+  {
+    image: "/assets/culture-festival.webp",
+    alt: "社团文化节现场",
+    title: "社团文化节",
+    meta: "CAMPUS ARCHIVE / 003",
+  },
+  {
+    image: "/assets/team-room.webp",
+    alt: "学生社团管理中心成员合影",
+    title: "部门记忆",
+    meta: "TEAM ARCHIVE / 004",
+  },
+  {
+    image: "/assets/spring-festival.webp",
+    alt: "春日校园社团活动现场",
+    title: "校园舞台",
+    meta: "CAMPUS ARCHIVE / 005",
+  },
+];
 
 const departments: Department[] = [
   {
@@ -541,20 +581,111 @@ function Footer() {
   );
 }
 
+function HomeCarousel() {
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const currentSlide = homeSlides[slideIndex];
+
+  useEffect(() => {
+    if (
+      isPaused ||
+      isInteracting ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setSlideIndex((current) => (current + 1) % homeSlides.length);
+    }, 5200);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [isInteracting, isPaused, slideIndex]);
+
+  const showSlide = (index: number) => {
+    setSlideIndex((index + homeSlides.length) % homeSlides.length);
+  };
+
+  return (
+    <div
+      className="home-photo"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="学生社团管理中心活动照片"
+      onMouseEnter={() => setIsInteracting(true)}
+      onMouseLeave={() => setIsInteracting(false)}
+      onFocusCapture={() => setIsInteracting(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          setIsInteracting(false);
+        }
+      }}
+    >
+      <div
+        className="home-carousel-slides"
+        aria-live={isPaused ? "polite" : "off"}
+      >
+        {homeSlides.map((slide, index) => (
+          <div
+            className={`home-slide ${slideIndex === index ? "is-active" : ""}`}
+            key={slide.image}
+            aria-hidden={slideIndex !== index}
+          >
+            <Image
+              src={assetPath(slide.image)}
+              alt={slide.alt}
+              fill
+              priority={index === 0}
+              sizes="(max-width: 800px) 80vw, 52vw"
+            />
+          </div>
+        ))}
+      </div>
+      <div className="home-photo-tag">
+        <span>{currentSlide.meta}</span>
+        <strong>{currentSlide.title}</strong>
+      </div>
+      <div className="home-carousel-controls" aria-label="照片轮播控制">
+        <button
+          type="button"
+          onClick={() => showSlide(slideIndex - 1)}
+          aria-label="上一张照片"
+        >
+          ←
+        </button>
+        <span aria-live="polite">
+          {String(slideIndex + 1).padStart(2, "0")} /{" "}
+          {String(homeSlides.length).padStart(2, "0")}
+        </span>
+        <button
+          type="button"
+          onClick={() => showSlide(slideIndex + 1)}
+          aria-label="下一张照片"
+        >
+          →
+        </button>
+        <button
+          className="home-carousel-pause"
+          type="button"
+          onClick={() => setIsPaused((paused) => !paused)}
+          aria-pressed={isPaused}
+          aria-label={isPaused ? "继续自动播放" : "暂停自动播放"}
+        >
+          {isPaused ? "PLAY" : "PAUSE"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function Home() {
   return (
     <>
       <section className="home-hero">
-        <div className="home-photo">
-          <Image
-            src={assetPath("/assets/hero-night.webp")}
-            alt="学生社团风采节现场合影"
-            fill
-            priority
-            sizes="(max-width: 800px) 80vw, 52vw"
-          />
-          <span className="home-photo-tag">CAMPUS ARCHIVE / 001</span>
-        </div>
+        <HomeCarousel />
         <div className="bauhaus-rail" aria-hidden="true">
           <span />
           <span />
@@ -572,6 +703,10 @@ function Home() {
           </h1>
           <div>
             <p className="home-motto">让热爱发生，让青春留下痕迹。</p>
+            <Link className="home-join-link" href="/join">
+              <span>JOIN US / 加入我们</span>
+              <span aria-hidden="true">→</span>
+            </Link>
             <div className="home-meta">
               <span>SCMC / 2026</span>
               <span>HANGZHOU</span>

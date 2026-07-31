@@ -47,6 +47,31 @@ test("prefixes routes and assets with the repository path", async () => {
   assert.doesNotMatch(html, /(?:src|href)="\/assets\//i);
 });
 
+test("cycles multiple official photos on the homepage and links directly to join", async () => {
+  const [html, source, styles] = await Promise.all([
+    readExport("index.html"),
+    readSiteShell(),
+    readStyles(),
+  ]);
+  const homePhotos = [
+    "hero-night.webp",
+    "club-fair.webp",
+    "culture-festival.webp",
+    "team-room.webp",
+    "spring-festival.webp",
+  ];
+
+  for (const photo of homePhotos) {
+    assert.match(source, new RegExp(`/assets/${photo.replace(".", "\\.")}`));
+  }
+
+  assert.match(source, /window\.setTimeout/);
+  assert.match(source, /prefers-reduced-motion: reduce/);
+  assert.match(source, /暂停自动播放/);
+  assert.match(styles, /\.home-slide\.is-active/);
+  assert.match(html, /href="\/zjsu-sg\/join\/"/i);
+});
+
 test("keeps each department paired with a relevant recruitment or work photo", async () => {
   const source = await readSiteShell();
   const expectedPairs = [
