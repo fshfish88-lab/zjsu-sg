@@ -113,7 +113,9 @@ img {
   letter-spacing: 0.08em;
   text-align: center;
   text-transform: uppercase;
-  transition: color 180ms ease, background 180ms ease;
+  transition:
+    color 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 320ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-link span {
@@ -152,6 +154,7 @@ img {
   grid-template-rows: 76px 1fr;
   background: var(--ink);
   color: var(--white);
+  animation: menu-enter 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .mobile-menu-header {
@@ -162,6 +165,8 @@ img {
   border-bottom: 1px solid #454540;
   font-size: 12px;
   letter-spacing: 0.14em;
+  animation: menu-item-enter 420ms 80ms cubic-bezier(0.16, 1, 0.3, 1)
+    both;
 }
 
 .mobile-menu-header button {
@@ -186,6 +191,31 @@ img {
   font-weight: 800;
   letter-spacing: -0.04em;
   text-transform: uppercase;
+  animation: menu-item-enter 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mobile-menu-nav a:nth-child(1) {
+  animation-delay: 80ms;
+}
+
+.mobile-menu-nav a:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.mobile-menu-nav a:nth-child(3) {
+  animation-delay: 160ms;
+}
+
+.mobile-menu-nav a:nth-child(4) {
+  animation-delay: 200ms;
+}
+
+.mobile-menu-nav a:nth-child(5) {
+  animation-delay: 240ms;
+}
+
+.mobile-menu-nav a:nth-child(6) {
+  animation-delay: 280ms;
 }
 
 .mobile-menu-nav span {
@@ -196,15 +226,56 @@ img {
 }
 
 .page {
-  animation: page-enter 180ms ease both;
+  animation: page-enter 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: 50% 18%;
+}
+
+.page.is-leaving {
+  pointer-events: none;
+  animation: page-leave 260ms cubic-bezier(0.4, 0, 1, 1) both;
 }
 
 @keyframes page-enter {
   from {
     opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.997);
   }
   to {
     opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes page-leave {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, -8px, 0) scale(0.998);
+  }
+}
+
+@keyframes menu-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes menu-item-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -458,12 +529,37 @@ img {
   font-size: 11px;
   letter-spacing: 0.12em;
   text-align: left;
+  transition:
+    color 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tab-button.active,
 .tab-button:hover {
   background: var(--ink);
   color: var(--white);
+}
+
+.tab-button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.content-switch {
+  animation: content-switch-enter 520ms cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+  will-change: transform, opacity;
+}
+
+@keyframes content-switch-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .about-panel {
@@ -685,6 +781,9 @@ img {
   background: transparent;
   cursor: pointer;
   text-align: left;
+  transition:
+    color 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .department-row .num {
@@ -716,10 +815,31 @@ img {
   transform: translateX(4px);
 }
 
+.department-row:active {
+  transform: translateY(1px) scale(0.995);
+}
+
 .department-preview {
   position: sticky;
   top: 110px;
   align-self: start;
+}
+
+.department-preview-swap {
+  animation: preview-switch-enter 460ms cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+  will-change: transform, opacity;
+}
+
+@keyframes preview-switch-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(12px, 0, 0) scale(0.992);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 .department-preview-image {
@@ -750,6 +870,51 @@ img {
   display: grid;
   grid-template-columns: minmax(0, 0.75fr) minmax(360px, 1fr);
   gap: clamp(40px, 8vw, 130px);
+}
+
+.department-detail-view {
+  animation: detail-view-enter 580ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.department-detail-view .department-detail > div:first-child {
+  animation: detail-copy-enter 620ms 50ms cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+.department-detail-view .department-detail > div:last-child {
+  animation: detail-media-enter 680ms 80ms cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+@keyframes detail-view-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes detail-copy-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(-18px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes detail-media-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(18px, 0, 0) scale(0.992);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 .back-button {
@@ -968,6 +1133,43 @@ img {
   object-fit: cover;
 }
 
+.event-copy-swap,
+.event-photo-swap,
+.event-story-swap {
+  animation: event-switch-enter 520ms cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+.event-photo-swap {
+  animation-name: event-photo-enter;
+}
+
+.event-story-swap {
+  animation-delay: 70ms;
+}
+
+@keyframes event-switch-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(-14px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes event-photo-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(14px, 0, 0) scale(1.015);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
 .event-switcher {
   display: grid;
   margin-top: 50px;
@@ -985,12 +1187,20 @@ img {
   cursor: pointer;
   font-size: 12px;
   text-align: center;
+  transition:
+    color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .event-switcher button.active,
 .event-switcher button:hover {
   background: var(--blue);
   color: var(--white);
+}
+
+.event-switcher button:active {
+  transform: translateY(1px) scale(0.98);
 }
 
 .event-story {
@@ -1029,6 +1239,10 @@ img {
   background: transparent;
   cursor: pointer;
   font-size: 11px;
+  transition:
+    color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .year-switcher button.active,
@@ -1037,11 +1251,65 @@ img {
   color: var(--white);
 }
 
+.year-switcher button:active {
+  transform: translateY(1px) scale(0.98);
+}
+
 .archive-grid {
   display: grid;
   margin-top: 64px;
   grid-template-columns: repeat(12, 1fr);
   gap: clamp(12px, 2vw, 28px);
+}
+
+.archive-grid-swap {
+  animation: archive-switch-enter 560ms cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+.archive-grid-swap .archive-item {
+  animation: archive-item-enter 560ms cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+.archive-grid-swap .archive-item:nth-child(2) {
+  animation-delay: 45ms;
+}
+
+.archive-grid-swap .archive-item:nth-child(3) {
+  animation-delay: 90ms;
+}
+
+.archive-grid-swap .archive-item:nth-child(4) {
+  animation-delay: 135ms;
+}
+
+.archive-grid-swap .archive-item:nth-child(5) {
+  animation-delay: 180ms;
+}
+
+.archive-grid-swap .archive-item:nth-child(6) {
+  animation-delay: 225ms;
+}
+
+@keyframes archive-switch-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes archive-item-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.992);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 .archive-item {
@@ -1106,6 +1374,7 @@ img {
   padding: clamp(18px, 4vw, 54px);
   background: rgba(20, 20, 19, 0.96);
   color: var(--white);
+  animation: lightbox-enter 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .lightbox-top {
@@ -1137,6 +1406,31 @@ img {
   height: auto;
   max-height: 72vh;
   object-fit: contain;
+}
+
+.lightbox-image-swap {
+  animation: lightbox-image-enter 420ms cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+@keyframes lightbox-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightbox-image-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 .lightbox-bottom {

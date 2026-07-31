@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import type { MouseEvent } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const assetBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -439,15 +441,22 @@ function Header({
   page,
   menuOpen,
   setMenuOpen,
+  onNavigate,
 }: {
   page: PageName;
   menuOpen: boolean;
   setMenuOpen: (open: boolean) => void;
+  onNavigate: (event: MouseEvent<HTMLAnchorElement>, href: string) => void;
 }) {
   return (
     <>
       <header className="topbar">
-        <Link className="brand-link" href="/" aria-label="返回首页">
+        <Link
+          className="brand-link"
+          href="/"
+          aria-label="返回首页"
+          onClick={(event) => onNavigate(event, "/")}
+        >
           <Image
             className="brand-mark"
             src={assetPath("/assets/scmc-mark.png")}
@@ -468,6 +477,7 @@ function Header({
               href={item.href}
               key={item.page}
               aria-current={page === item.page ? "page" : undefined}
+              onClick={(event) => onNavigate(event, item.href)}
             >
               <span>{item.num}</span>
               {item.label}
@@ -501,7 +511,7 @@ function Header({
               <Link
                 href={item.href}
                 key={item.page}
-                onClick={() => setMenuOpen(false)}
+                onClick={(event) => onNavigate(event, item.href)}
               >
                 <span>{item.num}</span>
                 {item.label}
@@ -737,7 +747,9 @@ function About() {
             </button>
           ))}
         </div>
-        {panel[tab]}
+        <div className="content-switch" key={tab}>
+          {panel[tab]}
+        </div>
       </section>
       <section className="about-photo-rail" aria-label="学生社团管理中心工作现场">
         {[
@@ -770,7 +782,7 @@ function Departments() {
 
   if (detailIndex !== null) {
     return (
-      <div className="page-shell">
+      <div className="page-shell department-detail-view">
         <button
           className="back-button"
           type="button"
@@ -880,19 +892,21 @@ function Departments() {
           </div>
         </div>
         <aside className="department-preview" aria-live="polite">
-          <div className="department-preview-image">
-            <Image
-              src={assetPath(current.image)}
-              alt={`${current.name}预览`}
-              width={1000}
-              height={1250}
-              sizes="(max-width: 800px) 100vw, 42vw"
-              style={{ objectPosition: current.previewPosition }}
-            />
-          </div>
-          <div className="department-preview-meta">
-            <span>{current.en}</span>
-            <span>{current.keywords.join(" / ")}</span>
+          <div className="department-preview-swap" key={previewIndex}>
+            <div className="department-preview-image">
+              <Image
+                src={assetPath(current.image)}
+                alt={`${current.name}预览`}
+                width={1000}
+                height={1250}
+                sizes="(max-width: 800px) 100vw, 42vw"
+                style={{ objectPosition: current.previewPosition }}
+              />
+            </div>
+            <div className="department-preview-meta">
+              <span>{current.en}</span>
+              <span>{current.keywords.join(" / ")}</span>
+            </div>
           </div>
         </aside>
       </section>
@@ -907,15 +921,14 @@ function Events() {
   return (
     <div className="page-shell">
       <section className="events-hero">
-        <div>
+        <div className="event-copy-swap" key={`copy-${eventIndex}`}>
           <p className="page-kicker">03 / EVENTS</p>
           <h1 className="event-title">{event.en}</h1>
           <p className="event-cn">{event.name}</p>
           <span className="event-date">{event.date}</span>
         </div>
-        <div className="event-photo">
+        <div className="event-photo event-photo-swap" key={`photo-${eventIndex}`}>
           <Image
-            key={event.image}
             src={assetPath(event.image)}
             alt={`${event.name}活动现场`}
             fill
@@ -938,7 +951,7 @@ function Events() {
           </button>
         ))}
       </div>
-      <section className="event-story">
+      <section className="event-story event-story-swap" key={`story-${eventIndex}`}>
         <h2>
           MAKE
           <br />
@@ -1014,7 +1027,7 @@ function Archive() {
             ))}
         </div>
       </section>
-      <section className="archive-grid" aria-live="polite">
+      <section className="archive-grid archive-grid-swap" key={year} aria-live="polite">
         {items.map((item, index) => (
           <button
             className="archive-item"
@@ -1058,7 +1071,10 @@ function Archive() {
               CLOSE ×
             </button>
           </div>
-          <div className="lightbox-image">
+          <div
+            className="lightbox-image lightbox-image-swap"
+            key={`${year}-${openIndex}`}
+          >
             <Image
               src={assetPath(activeItem.image)}
               alt={activeItem.title}
@@ -1209,7 +1225,11 @@ function Join() {
 }
 
 export function SiteShell({ page }: { page: PageName }) {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [leavingPage, setLeavingPage] = useState<PageName | null>(null);
+  const navigationTimer = useRef<number | null>(null);
+  const isLeaving = leavingPage === page;
   const content = useMemo(
     () =>
       ({
@@ -1221,6 +1241,46 @@ export function SiteShell({ page }: { page: PageName }) {
         join: <Join />,
       })[page],
     [page],
+  );
+
+  const handleNavigate = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    setMenuOpen(false);
+
+    const destination = navItems.find((item) => item.href === href)?.page;
+    if (destination === page || isLeaving) return;
+
+    setLeavingPage(page);
+    const transitionDelay = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches
+      ? 0
+      : 260;
+    navigationTimer.current = window.setTimeout(() => {
+      router.push(href);
+    }, transitionDelay);
+  };
+
+  useEffect(
+    () => () => {
+      if (navigationTimer.current !== null) {
+        window.clearTimeout(navigationTimer.current);
+      }
+    },
+    [],
   );
 
   useEffect(() => {
@@ -1236,8 +1296,11 @@ export function SiteShell({ page }: { page: PageName }) {
         page={page}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
+        onNavigate={handleNavigate}
       />
-      <main className="page">{content}</main>
+      <main className={`page ${isLeaving ? "is-leaving" : ""}`}>
+        {content}
+      </main>
       <Footer />
     </div>
   );

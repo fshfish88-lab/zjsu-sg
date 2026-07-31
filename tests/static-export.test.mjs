@@ -19,6 +19,10 @@ async function readSiteShell() {
   return readFile(new URL("../app/site-shell.tsx", import.meta.url), "utf8");
 }
 
+async function readStyles() {
+  return readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+}
+
 test("exports every primary route for GitHub Pages", async () => {
   for (const [relativePath, englishText, chineseText] of routes) {
     const html = await readExport(relativePath);
@@ -144,4 +148,19 @@ test("publishes the latest 2026 signup and QQ recruitment entrances", async () =
   assert.match(source, /recruitment-qq-qr-2026\.png/);
   assert.match(source, /QQ群：1067554166/);
   assert.match(source, /jZQkafWlCyaKBbphdQnxdg/);
+});
+
+test("adds smooth, reduced-motion-safe transitions to primary content switches", async () => {
+  const [source, styles] = await Promise.all([readSiteShell(), readStyles()]);
+
+  assert.match(source, /isLeaving/);
+  assert.match(source, /prefers-reduced-motion: reduce/);
+  assert.match(source, /className="content-switch"/);
+  assert.match(source, /className="department-preview-swap"/);
+  assert.match(source, /event-photo-swap/);
+  assert.match(styles, /@keyframes page-enter/);
+  assert.match(styles, /@keyframes page-leave/);
+  assert.match(styles, /@keyframes content-switch-enter/);
+  assert.match(styles, /@keyframes preview-switch-enter/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
 });
