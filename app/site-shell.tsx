@@ -46,6 +46,8 @@ type EventItem = {
   date: string;
   image: string;
   description: string;
+  articleUrl?: string;
+  articleTitle?: string;
 };
 
 type ArchiveItem = {
@@ -85,8 +87,8 @@ const homeSlides: HomeSlide[] = [
   },
   {
     image: "/assets/club-fair.webp",
-    alt: "百团大战社团招新现场",
-    title: "百团大战",
+    alt: "百团迎新社团招新现场",
+    title: "百团迎新",
     meta: "CAMPUS ARCHIVE / 002",
   },
   {
@@ -106,6 +108,24 @@ const homeSlides: HomeSlide[] = [
     alt: "春日校园社团活动现场",
     title: "校园舞台",
     meta: "CAMPUS ARCHIVE / 005",
+  },
+  {
+    image: "/assets/quality-project-hearing.webp",
+    alt: "学生社团精品活动线下立项听证会现场",
+    title: "精品活动立项",
+    meta: "CAMPUS ARCHIVE / 006",
+  },
+  {
+    image: "/assets/president-finance-training.webp",
+    alt: "社长大会暨财务报销培训会现场",
+    title: "社长大会暨财务报销培训会",
+    meta: "CAMPUS ARCHIVE / 007",
+  },
+  {
+    image: "/assets/presidents-salon.webp",
+    alt: "学生社团社长沙龙活动合影",
+    title: "社长沙龙",
+    meta: "CAMPUS ARCHIVE / 008",
   },
 ];
 
@@ -188,7 +208,7 @@ const departments: Department[] = [
     en: "EVENT PLANNING",
     slogan: "校园大型活动的核心推动者。",
     description: [
-      "活动策划部是校园大型活动的核心推动者，无论是社团风采节、社团文化节，还是百团大战等标志性活动，从最初的创意构思到细致的筹备安排，从活动现场的统筹执行到结束后的复盘总结，每个环节都活跃着策划部成员的身影。",
+      "活动策划部是校园大型活动的核心推动者，无论是社团风采节、社团文化节，还是百团迎新等标志性活动，从最初的创意构思到细致的筹备安排，从活动现场的统筹执行到结束后的复盘总结，每个环节都活跃着策划部成员的身影。",
       "在这里，成员们能将脑海中天马行空的想法转化为具体方案，在反复打磨中让创意落地生根；也会参与场地、物料、人员与流程的协同，让一场活动从纸面设想真正走到同学们面前。",
     ],
     image: "/assets/team-celebration.webp",
@@ -296,7 +316,7 @@ const departments: Department[] = [
     en: "HUMAN RESOURCES",
     slogan: "活动开展的“幕后调度员”。",
     description: [
-      "人力资源部是校级八大组织之一学生社团管理中心的一个人员统筹部门，对内负责统筹社团管理中心人员调配。",
+      "人力资源部是学生社团管理中心的人员统筹部门，对内负责统筹社团管理中心人员调配。",
       "部门承担内部大会召开、招新等大型活动的人员安排，组织社管人员考核与团建；日常还会收集社管内部行事历、记录成员工作，让人员信息和活动节奏保持清晰。",
       "作为活动开展的“幕后调度员”，人力资源部全程深度参与社管各类大型活动的筹备与执行，在协调人力、凝聚团队中发挥关键的作用。",
     ],
@@ -331,7 +351,7 @@ const departments: Department[] = [
 
 const events: EventItem[] = [
   {
-    name: "百团大战",
+    name: "百团迎新",
     en: "CLUB FAIR",
     date: "ANNUAL / AUTUMN",
     image: "/assets/club-fair.webp",
@@ -361,6 +381,47 @@ const events: EventItem[] = [
     image: "/assets/star-club-review.webp",
     description:
       "围绕规范运营、活动质量与文化影响力开展年度评价，挖掘认真耕耘的优秀社团，也为持续成长提供清晰方向。",
+  },
+  {
+    name: "新社团成立",
+    en: "NEW CLUB REVIEW",
+    date: "ANNUAL / ESTABLISHMENT",
+    image: "/assets/new-club-establishment.webp",
+    description:
+      "面向申请成立的学生社团开展材料审核、现场陈述与答辩评审，帮助兴趣共同体进一步明确组织定位、运行规范与发展计划，让新的校园社团稳健启程。",
+  },
+  {
+    name: "精品活动立项",
+    en: "QUALITY PROJECT HEARING",
+    date: "2025 / MAY 11",
+    image: "/assets/quality-project-hearing.webp",
+    description:
+      "2025年学生社团“精品活动”线下立项听证会在字母楼A420举行。各社团通过现场陈述与PPT展示介绍活动方案，评委围绕项目质量与可行性进行公平、客观的评审。",
+    articleUrl:
+      "https://mp.weixin.qq.com/s/gxF6TlI9heCmiey8aMbzgw?scene=1&click_id=587016166",
+    articleTitle: "查看精品活动线下立项听证会报道",
+  },
+  {
+    name: "社长大会暨财务报销培训会",
+    en: "PRESIDENTS ASSEMBLY",
+    date: "2024 / OCT 30",
+    image: "/assets/president-finance-training.webp",
+    description:
+      "大会围绕社团规范建设、活动开展与财务报销展开。校团委老师、学生社团管理中心与各社团负责人共同交流工作要求，并通过报销流程讲解、注意事项说明和现场答疑，为社团后续工作提供清晰指引。",
+    articleUrl:
+      "https://mp.weixin.qq.com/s/NKRAyOcY-hg6igbNU3EKaw?scene=1",
+    articleTitle: "查看社长大会暨财务报销培训会报道",
+  },
+  {
+    name: "社长沙龙",
+    en: "PRESIDENTS SALON",
+    date: "2026 / APR 22",
+    image: "/assets/presidents-salon.webp",
+    description:
+      "各社团负责人围绕活动策划、嘉宾邀请、资源整合、风险防控与骨干传承等实际问题分享经验，在坦诚交流中凝聚共识，共同探索社团高质量发展的新思路。",
+    articleUrl:
+      "https://mp.weixin.qq.com/s/jpJ4v2e92OdXTs1vpUutZQ?scene=1",
+    articleTitle: "查看社长沙龙总结回顾",
   },
   {
     name: "年度总结",
@@ -441,7 +502,7 @@ const archive: Record<string, ArchiveItem[]> = {
 
 const aboutActivities = [
   {
-    name: "百团大战",
+    name: "百团迎新",
     en: "CLUB FAIR",
     image: "/assets/club-fair.webp",
     description:
@@ -469,9 +530,16 @@ const aboutActivities = [
       "经社团自主申报、材料审核和现场评审，结合规范运营、活动质量与文化影响力形成年度评价，为社团成长提供清晰方向。",
   },
   {
+    name: "新社团成立",
+    en: "NEW CLUB REVIEW",
+    image: "/assets/new-club-establishment.webp",
+    description:
+      "通过成立申请、材料审核、现场陈述与答辩评审，帮助新社团厘清组织定位、完善运行规范，让新的兴趣共同体稳健启程。",
+  },
+  {
     name: "精品活动立项",
     en: "QUALITY PROJECTS",
-    image: "/assets/project-review.webp",
+    image: "/assets/quality-project-hearing.webp",
     description:
       "通过项目申报、评审和跟进培育，为高质量社团文化活动提供支持，推动特色项目沉淀为校园文化品牌。",
   },
@@ -723,7 +791,7 @@ function Home() {
         <div>
           <p className="section-label">WHO WE ARE / 我们是谁</p>
           <p className="body-copy">
-            作为八大校级学生组织之一，学生社团管理中心是全校学生社团的管理、协调和监督机构，一直致力于挖掘社团的潜力，服务社团的发展，繁荣校园文化，建设和谐商大。
+            作为校级学生组织之一，学生社团管理中心是全校学生社团的管理、协调和监督机构，一直致力于挖掘社团的潜力，服务社团的发展，繁荣校园文化，建设和谐商大。
           </p>
           <Link className="text-link" href="/about">
             Discover SCMC <span aria-hidden="true">→</span>
@@ -750,7 +818,7 @@ function About() {
             <p className="section-label">工作概况 / WHO WE ARE</p>
             <div className="about-copy-text">
               <p className="body-copy">
-                作为八大校级学生组织之一，学生社团管理中心是全校学生社团的管理、协调和监督机构，一直致力于挖掘社团的潜力，服务社团的发展，繁荣校园文化，建设和谐商大。
+                作为校级学生组织之一，学生社团管理中心是全校学生社团的管理、协调和监督机构，一直致力于挖掘社团的潜力，服务社团的发展，繁荣校园文化，建设和谐商大。
               </p>
               <p className="body-copy">
                 我们连接校团委、全校学生社团与每一位热爱校园文化的同学，陪伴社团从成立、规范运行到项目成长，也通过品牌活动让不同兴趣与创意在校园里相遇。
@@ -775,7 +843,7 @@ function About() {
                 六个部门分工协作：综合事务保障制度与财务流程，对外拓展连接资源与伙伴，活动策划推动品牌活动，精品建设陪伴社团提质，传媒运营记录与传播校园故事，人力资源统筹人员与团队成长。
               </p>
               <p className="body-copy">
-                从百团大战、社团风采节、社团文化节，到星级社团评定、精品活动立项与七星社长评选，我们以具体工作支持社团，也让更多同学看见校园文化的丰富可能。
+                从百团迎新、社团风采节、社团文化节，到星级社团评定、精品活动立项与七星社长评选，我们以具体工作支持社团，也让更多同学看见校园文化的丰富可能。
               </p>
             </div>
           </div>
@@ -793,7 +861,7 @@ function About() {
           <div className="about-copy-block">
             <p className="section-label">大型活动举办 / CAMPUS EVENTS</p>
             <p className="body-copy">
-              学生社团管理中心每年定期举办百团纳新、社团风采节、社团文化节等品牌活动，同时开展星级社团评定、精品活动立项和七星社长评选，以展示社团成果、培育文化品牌、支持社团持续成长。
+              学生社团管理中心每年定期举办百团迎新、社团风采节、社团文化节等品牌活动，同时开展新社团成立答辩、星级社团评定、精品活动立项和七星社长评选，以展示社团成果、培育文化品牌、支持社团持续成长。
             </p>
           </div>
           <div className="function-list">
@@ -905,7 +973,7 @@ function About() {
       </section>
       <section className="about-photo-rail" aria-label="学生社团管理中心工作现场">
         {[
-          ["/assets/club-fair.webp", "01 / 百团大战"],
+          ["/assets/club-fair.webp", "01 / 百团迎新"],
           ["/assets/star-club-review.webp", "02 / 社团评审现场"],
           ["/assets/showcase-stage.webp", "03 / 社团风采节"],
         ].map(([image, caption]) => (
@@ -1154,6 +1222,16 @@ function Events() {
         <div>
           <p className="section-label">ABOUT THIS EVENT / 活动记录</p>
           <p className="body-copy">{event.description}</p>
+          {event.articleUrl && event.articleTitle ? (
+            <a
+              className="text-link event-article-link"
+              href={event.articleUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {event.articleTitle} <span aria-hidden="true">↗</span>
+            </a>
+          ) : null}
         </div>
       </section>
     </div>

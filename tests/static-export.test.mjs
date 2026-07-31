@@ -6,7 +6,7 @@ const routes = [
   ["index.html", "STUDENT", "让热爱发生"],
   ["about/index.html", "WHO", "我们是谁"],
   ["departments/index.html", "SIX", "六个部门"],
-  ["events/index.html", "CLUB FAIR", "百团大战"],
+  ["events/index.html", "CLUB FAIR", "百团迎新"],
   ["archive/index.html", "CAMPUS", "校园档案"],
   ["join/index.html", "JOIN", "新的故事"],
 ];
@@ -59,6 +59,9 @@ test("cycles multiple official photos on the homepage and links directly to join
     "culture-festival.webp",
     "team-room.webp",
     "spring-festival.webp",
+    "quality-project-hearing.webp",
+    "president-finance-training.webp",
+    "presidents-salon.webp",
   ];
 
   for (const photo of homePhotos) {
@@ -99,14 +102,15 @@ test("keeps each department paired with a relevant recruitment or work photo", a
   }
 });
 
-test("expands the official campus work overview with six matching photo stories", async () => {
+test("expands the official campus work overview with matching photo stories", async () => {
   const source = await readSiteShell();
   const expectedActivities = [
-    ["百团大战", "club-fair.webp"],
+    ["百团迎新", "club-fair.webp"],
     ["社团风采节", "showcase-stage.webp"],
     ["社团文化节", "culture-festival.webp"],
     ["社团星级评定", "star-club-review.webp"],
-    ["精品活动立项", "project-review.webp"],
+    ["新社团成立", "new-club-establishment.webp"],
+    ["精品活动立项", "quality-project-hearing.webp"],
     ["七星社长评选", "team-honors.webp"],
   ];
 
@@ -121,7 +125,7 @@ test("expands the official campus work overview with six matching photo stories"
   }
 });
 
-test("keeps review, annual assembly, and honor archive photos semantically paired", async () => {
+test("keeps added event photos semantically paired", async () => {
   const source = await readSiteShell();
 
   assert.match(
@@ -130,7 +134,19 @@ test("keeps review, annual assembly, and honor archive photos semantically paire
   );
   assert.match(
     source,
-    /name: "年度总结"[\s\S]*?image: "\/assets\/training-stage\.webp"/,
+    /name: "新社团成立"[\s\S]*?image: "\/assets\/new-club-establishment\.webp"/,
+  );
+  assert.match(
+    source,
+    /name: "精品活动立项"[\s\S]*?image: "\/assets\/quality-project-hearing\.webp"/,
+  );
+  assert.match(
+    source,
+    /name: "社长大会暨财务报销培训会"[\s\S]*?image: "\/assets\/president-finance-training\.webp"/,
+  );
+  assert.match(
+    source,
+    /name: "社长沙龙"[\s\S]*?image: "\/assets\/presidents-salon\.webp"/,
   );
   assert.match(
     source,
@@ -141,12 +157,23 @@ test("keeps review, annual assembly, and honor archive photos semantically paire
 test("includes the detailed recruitment-push content hierarchy", async () => {
   const source = await readSiteShell();
 
-  assert.match(source, /作为八大校级学生组织之一/);
+  assert.match(source, /作为校级学生组织之一/);
+  assert.doesNotMatch(source, /八大校级学生组织|校级八大组织/);
   assert.match(source, /为你用心在此/);
   assert.match(source, /服务网络 \/ HOW WE WORK/);
   assert.match(source, /部门组织架构/);
   assert.match(source, /WHAT YOU GAIN \/ 成长收获/);
   assert.match(source, /社团成长的见证者与赋能者/);
+});
+
+test("uses the official names and WeChat references for added events", async () => {
+  const source = await readSiteShell();
+
+  assert.doesNotMatch(source, /百团大战/);
+  assert.match(source, /百团迎新/);
+  assert.match(source, /NKRAyOcY-hg6igbNU3EKaw/);
+  assert.match(source, /jpJ4v2e92OdXTs1vpUutZQ/);
+  assert.match(source, /gxF6TlI9heCmiey8aMbzgw/);
 });
 
 test("links every department to its matching official recruitment article", async () => {

@@ -5,7 +5,7 @@ const routes = [
   ["/", "STUDENT", "让热爱发生"],
   ["/about", "WHO", "我们是谁"],
   ["/departments", "SIX", "六个部门"],
-  ["/events", "CLUB FAIR", "百团大战"],
+  ["/events", "CLUB FAIR", "百团迎新"],
   ["/archive", "CAMPUS", "校园档案"],
   ["/join", "JOIN", "新的故事"],
 ];
