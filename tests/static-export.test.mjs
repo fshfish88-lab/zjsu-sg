@@ -69,6 +69,11 @@ test("cycles multiple official photos on the homepage and links directly to join
   assert.match(source, /prefers-reduced-motion: reduce/);
   assert.match(source, /暂停自动播放/);
   assert.match(styles, /\.home-slide\.is-active/);
+  assert.match(styles, /\.home-carousel-slides\s*\{\s*bottom: 84px;/);
+  assert.match(
+    styles,
+    /\.home-carousel-controls\s*\{\s*top: auto;\s*right: 0;\s*bottom: 0;\s*left: 0;/,
+  );
   assert.match(html, /href="\/zjsu-sg\/join\/"/i);
 });
 
