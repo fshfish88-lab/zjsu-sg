@@ -28,6 +28,8 @@ type Department = {
   previewPosition?: string;
   detailPosition?: string;
   keywords: string[];
+  articleUrl: string;
+  articleTitle: string;
   responsibilities: {
     title: string;
     text: string;
@@ -72,10 +74,13 @@ const departments: Department[] = [
     description: [
       "综合事务部是学生社团管理中心里的一个综合性部门，对内主要负责社管经费报销、换届文件整理等，致力于保障社管工作的连续性和活动的顺利开展。",
       "对外负责全校社团的干部干事考核、社团行事历收集，以及以财务制度为中心，为全校社团解决财务报销等事宜；同时，协助召开新社团成立答辩会与社长大会。",
+      "综合事务部把细致的制度工作转化为每场活动背后的稳定支撑：从资料归档、节点提醒到沟通协调，既守住规范，也让社团获得清晰、及时的服务。",
     ],
     image: "/assets/team-night.webp",
     imageCaption: "TEAM SCENE / 综合事务部合照",
     keywords: ["ORDER", "SERVICE", "COORDINATE"],
+    articleUrl: "https://mp.weixin.qq.com/s/Hfm7AFG-PErTn29zBMBjEQ",
+    articleTitle: "综合事务部纳新推送",
     responsibilities: [
       {
         title: "经费报销与文件整理",
@@ -104,10 +109,13 @@ const departments: Department[] = [
     description: [
       "大家好，我们是对外拓展部，是校社管的活力引擎！对外我们为社团活动拉赞助、拓渠道，更是与各大高校联络共同策划活动的基石。",
       "对内我们是全校社团的联络平台，助力你更加全方位地认识学校。",
+      "在一次次沟通、提案与合作落地中，成员既能让创意生根发芽，也能锻炼表达、谈判与临场应变能力。任何一位敢于尝试自己、挑战自己的“毛遂”，我们都在这里等你。",
     ],
     image: "/assets/team-outdoor.webp",
     imageCaption: "TEAM SCENE / 对外拓展部团队活动",
     keywords: ["CONNECT", "EXPLORE", "PARTNERSHIP"],
+    articleUrl: "https://mp.weixin.qq.com/s/K7866xaO4eiBulctZHw_cA",
+    articleTitle: "对外拓展部纳新推送",
     responsibilities: [
       {
         title: "拉赞助、拓渠道",
@@ -135,10 +143,13 @@ const departments: Department[] = [
     slogan: "校园大型活动的核心推动者。",
     description: [
       "活动策划部是校园大型活动的核心推动者，无论是社团风采节、社团文化节，还是百团大战等标志性活动，从最初的创意构思到细致的筹备安排，从活动现场的统筹执行到结束后的复盘总结，每个环节都活跃着策划部成员的身影。",
+      "在这里，成员们能将脑海中天马行空的想法转化为具体方案，在反复打磨中让创意落地生根；也会参与场地、物料、人员与流程的协同，让一场活动从纸面设想真正走到同学们面前。",
     ],
     image: "/assets/team-celebration.webp",
     imageCaption: "TEAM SCENE / 活动策划部合照",
     keywords: ["IDEA", "ACTION", "STAGE"],
+    articleUrl: "https://mp.weixin.qq.com/s/tZb2h0iVncQiCrrLiR5GcA",
+    articleTitle: "活动策划部纳新推送",
     responsibilities: [
       {
         title: "创意构思",
@@ -166,11 +177,14 @@ const departments: Department[] = [
     slogan: "社团成长的见证者与赋能者。",
     description: [
       "作为学生社团管理中心的重要职能部门，精建部紧密连接全校社团，立足校园文化建设与社团提质发展两大核心方向。",
-      "我们不止是冰冷的审核者，更是社团成长的见证者与赋能者。",
+      "我们牵头搭建完整的社团管理评价体系，统筹星级社团、七星社长、七星指导教师三大荣誉评选，负责全校社团年审注册，并开展精品活动立项申报与全程跟进培育。",
+      "我们不止是冰冷的审核者，更是社团成长的见证者与赋能者：在规范与创新之间，为优秀社团骨干、指导教师与特色项目提供被看见和继续成长的机会。",
     ],
     image: "/assets/team-annual.webp",
     imageCaption: "TEAM SCENE / 精品建设部合照",
     keywords: ["QUALITY", "GROWTH", "REVIEW"],
+    articleUrl: "https://mp.weixin.qq.com/s/0HJjq2ePYecXtPCrUgeKPQ",
+    articleTitle: "精品建设部纳新推送",
     responsibilities: [
       {
         title: "管理评价体系",
@@ -199,11 +213,14 @@ const departments: Department[] = [
     description: [
       "传媒运营部是校园社团的“传声筒”——整合全校社团动态，通过微信公众号将精彩活动预告、社管通告、各类评比信息及时传递给每一位同学。",
       "不止于此，我们还是校园活动的“记录者”与“设计师”：为社团风采节、社团文化节等年度盛会拍摄照片、剪辑视频，定格青春瞬间，用创意点亮每一次活动。",
+      "加入我们，你会深度参与选题策划、文案撰写、推送排版、摄影摄像与短视频剪辑。即使没有相关基础，也可以在真实项目和伙伴协作中一步步掌握这些技能。",
     ],
     image: "/assets/dept-media-story.webp",
     imageCaption: "WELCOME SCENE / 传媒运营部纳新准备",
     detailPosition: "50% 43%",
     keywords: ["MEDIA", "STORY", "DESIGN"],
+    articleUrl: "https://mp.weixin.qq.com/s/8FlyicfHWwOfGgtls04w_w",
+    articleTitle: "传媒运营部纳新推送",
     responsibilities: [
       {
         title: "整合社团动态",
@@ -231,11 +248,15 @@ const departments: Department[] = [
     slogan: "活动开展的“幕后调度员”。",
     description: [
       "人力资源部是校级八大组织之一学生社团管理中心的一个人员统筹部门，对内负责统筹社团管理中心人员调配。",
+      "部门承担内部大会召开、招新等大型活动的人员安排，组织社管人员考核与团建；日常还会收集社管内部行事历、记录成员工作，让人员信息和活动节奏保持清晰。",
       "作为活动开展的“幕后调度员”，人力资源部全程深度参与社管各类大型活动的筹备与执行，在协调人力、凝聚团队中发挥关键的作用。",
     ],
-    image: "/assets/team-awards.webp",
-    imageCaption: "TEAM SCENE / 人力资源部合照",
+    image: "/assets/dept-human-resources.webp",
+    imageCaption: "TEAM SCENE / 人力资源部合照（纳新推送）",
+    detailPosition: "50% 50%",
     keywords: ["PEOPLE", "CULTURE", "GROWTH"],
+    articleUrl: "https://mp.weixin.qq.com/s/hwmIUUSmy3UjJBE9PsjjMg",
+    articleTitle: "人力资源部纳新推送",
     responsibilities: [
       {
         title: "人员调配",
@@ -575,15 +596,36 @@ function About() {
         <div className="about-copy-stack">
           <div className="about-copy-block">
             <p className="section-label">工作概况 / WHO WE ARE</p>
-            <p className="body-copy">
-              作为八大校级学生组织之一，学生社团管理中心是全校学生社团的管理、协调和监督机构，一直致力于挖掘社团的潜力，服务社团的发展，繁荣校园文化，建设和谐商大。
-            </p>
+            <div className="about-copy-text">
+              <p className="body-copy">
+                作为八大校级学生组织之一，学生社团管理中心是全校学生社团的管理、协调和监督机构，一直致力于挖掘社团的潜力，服务社团的发展，繁荣校园文化，建设和谐商大。
+              </p>
+              <p className="body-copy">
+                我们连接校团委、全校学生社团与每一位热爱校园文化的同学，陪伴社团从成立、规范运行到项目成长，也通过品牌活动让不同兴趣与创意在校园里相遇。
+              </p>
+            </div>
           </div>
           <div className="about-copy-block">
             <p className="section-label">组织理念 / OUR MISSION</p>
-            <p className="body-copy">
-              学生社团管理中心秉承着“为你用心在此”的理念，为学生社团提供全方位的支持和服务。我们有完善的管理体制、优秀的干部团队和广泛的影响力，将为社团的发展提供可靠的保障。
-            </p>
+            <div className="about-copy-text">
+              <p className="body-copy">
+                学生社团管理中心秉承着“为你用心在此”的理念，为学生社团提供全方位的支持和服务。无论你已经组建了社团，还是正在寻找感兴趣的校园活动，我们都愿意提供帮助。
+              </p>
+              <p className="body-copy">
+                完善的管理体制、协作紧密的干部团队与覆盖全校的社团网络，共同构成可靠的服务保障，让规范管理与多元创造在同一片校园中持续发生。
+              </p>
+            </div>
+          </div>
+          <div className="about-copy-block">
+            <p className="section-label">服务网络 / HOW WE WORK</p>
+            <div className="about-copy-text">
+              <p className="body-copy">
+                六个部门分工协作：综合事务保障制度与财务流程，对外拓展连接资源与伙伴，活动策划推动品牌活动，精品建设陪伴社团提质，传媒运营记录与传播校园故事，人力资源统筹人员与团队成长。
+              </p>
+              <p className="body-copy">
+                从百团大战、社团风采节、社团文化节，到星级社团评定、精品活动立项与七星社长评选，我们以具体工作支持社团，也让更多同学看见校园文化的丰富可能。
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -751,6 +793,17 @@ function Departments() {
                 </p>
               ))}
             </div>
+            <a
+              className="department-article-link"
+              href={current.articleUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`查看${current.name}纳新公众号推送`}
+            >
+              <span>WECHAT ARTICLE / 纳新推送</span>
+              <strong>{current.articleTitle}</strong>
+              <span aria-hidden="true">↗</span>
+            </a>
             <div className="keyword-row" aria-label="部门关键词">
               {current.keywords.map((keyword) => (
                 <span key={keyword}>{keyword}</span>
@@ -1064,18 +1117,60 @@ function Join() {
           <p className="join-subtitle">新的故事，等待你的加入。</p>
           <span className="join-year">RECRUITMENT / 2026</span>
         </div>
-        <div className="join-card">
-          <h2>WECHAT / 公众号</h2>
-          <Image
-            src={assetPath("/assets/wechat-qr.jpg")}
-            alt="浙江工商大学学生社团管理中心微信公众号二维码"
-            width={640}
-            height={640}
-            priority
-          />
-          <p>
-            扫码关注公众号，获取纳新时间、报名方式与最新校园社团活动信息。
-          </p>
+        <div className="join-actions" aria-label="2026 年纳新入口">
+          <article className="join-card">
+            <div className="join-card-header">
+              <span>01</span>
+              <h2>报名二维码 / FORM</h2>
+            </div>
+            <Image
+              src={assetPath("/assets/recruitment-signup-qr-2026.png")}
+              alt="2026年浙江工商大学学生社团管理中心纳新报名二维码"
+              width={666}
+              height={666}
+              priority
+            />
+            <strong>2026 线上报名表</strong>
+            <p>扫码填写并提交报名信息，完成线上报名。</p>
+          </article>
+          <article className="join-card">
+            <div className="join-card-header">
+              <span>02</span>
+              <h2>纳新群 / QQ GROUP</h2>
+            </div>
+            <Image
+              src={assetPath("/assets/recruitment-qq-qr-2026.png")}
+              alt="学生社团管理中心2026年纳新QQ群二维码，群号1067554166"
+              width={1056}
+              height={1056}
+              priority
+            />
+            <strong>QQ群：1067554166</strong>
+            <p>扫码加入官方纳新群，及时获取通知与现场安排。</p>
+          </article>
+          <article className="join-card join-card-wide">
+            <Image
+              src={assetPath("/assets/wechat-qr.jpg")}
+              alt="浙江工商大学学生社团管理中心微信公众号二维码"
+              width={640}
+              height={640}
+            />
+            <div>
+              <div className="join-card-header">
+                <span>03</span>
+                <h2>公众号 / WECHAT</h2>
+              </div>
+              <strong>学生社团管理中心</strong>
+              <p>关注公众号，查看部门介绍、纳新安排与校园社团活动。</p>
+              <a
+                href="https://mp.weixin.qq.com/s/jZQkafWlCyaKBbphdQnxdg"
+                target="_blank"
+                rel="noreferrer"
+              >
+                查看 2026 总纳新推送 <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
         </div>
       </section>
       <section className="page-shell join-details">
@@ -1092,8 +1187,11 @@ function Join() {
               "认识我们",
               "了解综合事务、对外拓展、活动策划、精品建设、传媒运营和人力资源六个部门。",
             ],
-            ["关注招新", "通过微信公众号获取正式纳新通知与现场安排。"],
-            ["提交报名", "按推文指引加入官方纳新群，并完成线上报名。"],
+            [
+              "加入纳新群",
+              "扫描纳新QQ群二维码加入群聊，群号 1067554166，及时获取通知与现场安排。",
+            ],
+            ["提交报名", "扫描报名二维码填写并提交线上报名表，完成报名。"],
             ["一起创造", "把你的兴趣、能力和好奇心带来，与我们共同建设校园文化。"],
           ].map(([title, text], index) => (
             <div className="join-step" key={title}>

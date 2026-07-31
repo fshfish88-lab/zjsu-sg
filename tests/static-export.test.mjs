@@ -51,7 +51,7 @@ test("keeps each department paired with a relevant recruitment or work photo", a
     ["活动策划部", "team-celebration.webp"],
     ["精品建设部", "team-annual.webp"],
     ["传媒运营部", "dept-media-story.webp"],
-    ["人力资源部", "team-awards.webp"],
+    ["人力资源部", "dept-human-resources.webp"],
   ];
 
   for (const [department, image] of expectedPairs) {
@@ -109,7 +109,39 @@ test("includes the detailed recruitment-push content hierarchy", async () => {
 
   assert.match(source, /作为八大校级学生组织之一/);
   assert.match(source, /为你用心在此/);
+  assert.match(source, /服务网络 \/ HOW WE WORK/);
   assert.match(source, /部门组织架构/);
   assert.match(source, /WHAT YOU GAIN \/ 成长收获/);
   assert.match(source, /社团成长的见证者与赋能者/);
+});
+
+test("links every department to its matching official recruitment article", async () => {
+  const source = await readSiteShell();
+  const expectedArticles = [
+    ["综合事务部", "Hfm7AFG-PErTn29zBMBjEQ"],
+    ["对外拓展部", "K7866xaO4eiBulctZHw_cA"],
+    ["活动策划部", "tZb2h0iVncQiCrrLiR5GcA"],
+    ["精品建设部", "0HJjq2ePYecXtPCrUgeKPQ"],
+    ["传媒运营部", "8FlyicfHWwOfGgtls04w_w"],
+    ["人力资源部", "hwmIUUSmy3UjJBE9PsjjMg"],
+  ];
+
+  for (const [department, articleId] of expectedArticles) {
+    assert.match(
+      source,
+      new RegExp(
+        `name: "${department}"[\\s\\S]*?articleUrl: "https://mp\\.weixin\\.qq\\.com/s/${articleId}"`,
+      ),
+      department,
+    );
+  }
+});
+
+test("publishes the latest 2026 signup and QQ recruitment entrances", async () => {
+  const source = await readSiteShell();
+
+  assert.match(source, /recruitment-signup-qr-2026\.png/);
+  assert.match(source, /recruitment-qq-qr-2026\.png/);
+  assert.match(source, /QQ群：1067554166/);
+  assert.match(source, /jZQkafWlCyaKBbphdQnxdg/);
 });
