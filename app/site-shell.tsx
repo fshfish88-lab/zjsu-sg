@@ -22,6 +22,7 @@ type PageName =
 
 type Department = {
   name: string;
+  slug: string;
   en: string;
   slogan: string;
   description: string[];
@@ -71,6 +72,7 @@ const navItems: { page: PageName; label: string; href: string; num: string }[] =
 const departments: Department[] = [
   {
     name: "综合事务部",
+    slug: "general-affairs",
     en: "GENERAL AFFAIRS",
     slogan: "保障社管工作的连续性和活动的顺利开展。",
     description: [
@@ -106,6 +108,7 @@ const departments: Department[] = [
   },
   {
     name: "对外拓展部",
+    slug: "outreach",
     en: "OUTREACH",
     slogan: "校社管的活力引擎。",
     description: [
@@ -141,6 +144,7 @@ const departments: Department[] = [
   },
   {
     name: "活动策划部",
+    slug: "event-planning",
     en: "EVENT PLANNING",
     slogan: "校园大型活动的核心推动者。",
     description: [
@@ -175,6 +179,7 @@ const departments: Department[] = [
   },
   {
     name: "精品建设部",
+    slug: "quality-development",
     en: "QUALITY DEVELOPMENT",
     slogan: "社团成长的见证者与赋能者。",
     description: [
@@ -210,6 +215,7 @@ const departments: Department[] = [
   },
   {
     name: "传媒运营部",
+    slug: "media-design",
     en: "MEDIA & DESIGN",
     slogan: "校园社团的“传声筒”。",
     description: [
@@ -246,6 +252,7 @@ const departments: Department[] = [
   },
   {
     name: "人力资源部",
+    slug: "human-resources",
     en: "HUMAN RESOURCES",
     slogan: "活动开展的“幕后调度员”。",
     description: [
@@ -694,11 +701,21 @@ function About() {
           </div>
           <div className="structure-grid">
             {departments.map((department, index) => (
-              <div className="structure-cell" key={department.name}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+              <Link
+                className="structure-cell"
+                href={`/departments?department=${department.slug}`}
+                key={department.name}
+                aria-label={`查看${department.name}详细介绍`}
+              >
+                <span className="structure-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <strong>{department.name}</strong>
                 <small>{department.en}</small>
-              </div>
+                <span className="structure-link-label">
+                  查看介绍 <b aria-hidden="true">→</b>
+                </span>
+              </Link>
             ))}
           </div>
         </div>
@@ -780,13 +797,55 @@ function Departments() {
   const [detailIndex, setDetailIndex] = useState<number | null>(null);
   const current = departments[detailIndex ?? previewIndex];
 
+  useEffect(() => {
+    const syncDepartmentFromUrl = () => {
+      const slug = new URLSearchParams(window.location.search).get(
+        "department",
+      );
+      const index = departments.findIndex(
+        (department) => department.slug === slug,
+      );
+
+      if (index >= 0) {
+        setPreviewIndex(index);
+        setDetailIndex(index);
+      } else {
+        setDetailIndex(null);
+      }
+    };
+
+    syncDepartmentFromUrl();
+    window.addEventListener("popstate", syncDepartmentFromUrl);
+
+    return () => {
+      window.removeEventListener("popstate", syncDepartmentFromUrl);
+    };
+  }, []);
+
+  const openDepartment = (index: number) => {
+    const department = departments[index];
+    const url = `${window.location.pathname}?department=${department.slug}`;
+
+    window.history.pushState(window.history.state, "", url);
+    setDetailIndex(index);
+  };
+
+  const closeDepartment = () => {
+    window.history.replaceState(
+      window.history.state,
+      "",
+      window.location.pathname,
+    );
+    setDetailIndex(null);
+  };
+
   if (detailIndex !== null) {
     return (
       <div className="page-shell department-detail-view">
         <button
           className="back-button"
           type="button"
-          onClick={() => setDetailIndex(null)}
+          onClick={closeDepartment}
         >
           ← BACK TO DEPARTMENTS
         </button>
@@ -875,7 +934,7 @@ function Departments() {
                 key={department.name}
                 onMouseEnter={() => setPreviewIndex(index)}
                 onFocus={() => setPreviewIndex(index)}
-                onClick={() => setDetailIndex(index)}
+                onClick={() => openDepartment(index)}
               >
                 <span className="num">
                   {String(index + 1).padStart(2, "0")}

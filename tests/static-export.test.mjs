@@ -141,6 +141,32 @@ test("links every department to its matching official recruitment article", asyn
   }
 });
 
+test("links every structure card to its matching department introduction", async () => {
+  const source = await readSiteShell();
+  const slugs = [
+    "general-affairs",
+    "outreach",
+    "event-planning",
+    "quality-development",
+    "media-design",
+    "human-resources",
+  ];
+
+  for (const slug of slugs) {
+    assert.match(
+      source,
+      new RegExp(`slug: "${slug}"`),
+      slug,
+    );
+  }
+
+  assert.match(
+    source,
+    /href=\{`\/departments\?department=\$\{department\.slug\}`\}/,
+  );
+  assert.match(source, /aria-label=\{`查看\$\{department\.name\}详细介绍`\}/);
+});
+
 test("publishes the latest 2026 signup and QQ recruitment entrances", async () => {
   const source = await readSiteShell();
 
