@@ -261,7 +261,7 @@ const departments: Department[] = [
       "作为活动开展的“幕后调度员”，人力资源部全程深度参与社管各类大型活动的筹备与执行，在协调人力、凝聚团队中发挥关键的作用。",
     ],
     image: "/assets/dept-human-resources.webp",
-    imageCaption: "TEAM SCENE / 人力资源部合照（纳新推送）",
+    imageCaption: "TEAM SCENE / 人力资源部合照",
     detailPosition: "50% 50%",
     keywords: ["PEOPLE", "CULTURE", "GROWTH"],
     articleUrl: "https://mp.weixin.qq.com/s/hwmIUUSmy3UjJBE9PsjjMg",
