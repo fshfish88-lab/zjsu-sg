@@ -37,7 +37,10 @@ test("prefixes routes and assets with the repository path", async () => {
   const html = await readExport("index.html");
 
   assert.match(html, /href="\/zjsu-sg\/about\/"/i);
-  assert.match(html, /src="\/zjsu-sg\/assets\/hero-night\.webp"/i);
+  assert.match(
+    html,
+    /src="\/zjsu-sg\/assets\/live-showcase-2025-stage\.webp"/i,
+  );
   assert.match(html, /src="\/zjsu-sg\/assets\/scmc-mark\.png"/i);
   assert.match(html, /href="\/zjsu-sg\/_next\//i);
   assert.match(
@@ -54,11 +57,11 @@ test("cycles multiple official photos on the homepage and links directly to join
     readStyles(),
   ]);
   const homePhotos = [
-    "hero-night.webp",
-    "club-fair.webp",
-    "culture-festival.webp",
-    "team-room.webp",
-    "spring-festival.webp",
+    "live-showcase-2025-stage.webp",
+    "live-club-fair-2025-entrance.webp",
+    "live-culture-2026-stage.webp",
+    "live-spring-2025-concert.webp",
+    "live-autumn-2024-performance.webp",
     "quality-project-hearing.webp",
     "president-finance-training.webp",
     "presidents-salon.webp",
@@ -150,8 +153,27 @@ test("keeps added event photos semantically paired", async () => {
   );
   assert.match(
     source,
-    /image: "\/assets\/team-honors\.webp"[\s\S]*?title: "荣誉时刻"/,
+    /image: "\/assets\/live-culture-2026-stage\.webp"[\s\S]*?title: "春之行 · 舞台展演"/,
   );
+  assert.match(
+    source,
+    /image: "\/assets\/live-club-fair-2025-entrance\.webp"[\s\S]*?title: "百团迎新 · 校园入口"/,
+  );
+  assert.match(
+    source,
+    /image: "\/assets\/live-autumn-2024-performance\.webp"[\s\S]*?title: "国风雅韵 · 舞台展演"/,
+  );
+});
+
+test("archives the supplied live-gallery photos under their verified event years", async () => {
+  const source = await readSiteShell();
+
+  assert.match(source, /"2026": \[[\s\S]*?2026 \/ APR 01/);
+  assert.match(
+    source,
+    /"2025": \[[\s\S]*?2025 \/ SEP 17[\s\S]*?2025 \/ APR 02[\s\S]*?2025 \/ OCT 25/,
+  );
+  assert.match(source, /"2024": \[[\s\S]*?2024 \/ NOV 09/);
 });
 
 test("includes the detailed recruitment-push content hierarchy", async () => {
