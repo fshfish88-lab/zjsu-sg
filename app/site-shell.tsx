@@ -98,9 +98,9 @@ const homeSlides: HomeSlide[] = [
     meta: "CAMPUS ARCHIVE / 003",
   },
   {
-    image: "/assets/archive-spring-2025-piano.webp",
-    alt: "2025年春之行社团文化节樱花树下钢琴演奏",
-    title: "春之行 · 2025",
+    image: "/assets/archive-showcase-2025-dance.webp",
+    alt: "2025年狂响百团夜街舞社团舞台展演",
+    title: "狂响百团夜 · 舞台展演",
     meta: "CAMPUS ARCHIVE / 004",
   },
   {

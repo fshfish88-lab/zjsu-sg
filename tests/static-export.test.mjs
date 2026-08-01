@@ -60,7 +60,7 @@ test("cycles multiple official photos on the homepage and links directly to join
     "archive-showcase-2025-cover.webp",
     "archive-club-fair-2025-entry.webp",
     "archive-spring-2026-stage.webp",
-    "archive-spring-2025-piano.webp",
+    "archive-showcase-2025-dance.webp",
     "archive-relief-2025-foam.webp",
     "archive-guofeng-2024-opera.webp",
     "archive-showcase-2025-camera.webp",
@@ -84,6 +84,14 @@ test("cycles multiple official photos on the homepage and links directly to join
     homeSlidesBlock[1],
     /^\s*\{\s*image: "\/assets\/archive-showcase-2025-cover\.webp"/,
     "the user-selected DSC01254 photo must remain the first cover",
+  );
+  assert.match(
+    homeSlidesBlock[1],
+    /image: "\/assets\/archive-showcase-2025-dance\.webp"[\s\S]*?title: "狂响百团夜 · 舞台展演"/,
+  );
+  assert.doesNotMatch(
+    homeSlidesBlock[1],
+    /archive-spring-2025-piano\.webp/,
   );
 
   assert.match(source, /window\.setTimeout/);
@@ -209,6 +217,23 @@ test("archives one to three supplied photos for every identified event", async (
     /"2025": \[[\s\S]*?2025 \/ APR 02[\s\S]*?2025 \/ MAY 28[\s\S]*?2025 \/ SEP 17[\s\S]*?2025 \/ OCT 25/,
   );
   assert.match(source, /"2024": \[[\s\S]*?2024 \/ NOV 09/);
+});
+
+test("keeps every archive card at the same large desktop size", async () => {
+  const styles = await readStyles();
+
+  assert.match(
+    styles,
+    /\.archive-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/,
+  );
+  assert.doesNotMatch(
+    styles,
+    /\.archive-item:nth-child\([^)]*\)\s*\{[^}]*grid-column:/,
+  );
+  assert.match(
+    styles,
+    /@media \(max-width: 520px\)[\s\S]*?\.archive-grid\s*\{\s*grid-template-columns:\s*1fr;/,
+  );
 });
 
 test("includes the detailed recruitment-push content hierarchy", async () => {
