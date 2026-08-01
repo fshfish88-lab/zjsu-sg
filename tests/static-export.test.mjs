@@ -39,7 +39,7 @@ test("prefixes routes and assets with the repository path", async () => {
   assert.match(html, /href="\/zjsu-sg\/about\/"/i);
   assert.match(
     html,
-    /src="\/zjsu-sg\/assets\/live-showcase-2025-stage\.webp"/i,
+    /src="\/zjsu-sg\/assets\/archive-showcase-2025-cover\.webp"/i,
   );
   assert.match(html, /src="\/zjsu-sg\/assets\/scmc-mark\.png"/i);
   assert.match(html, /href="\/zjsu-sg\/_next\//i);
@@ -57,19 +57,34 @@ test("cycles multiple official photos on the homepage and links directly to join
     readStyles(),
   ]);
   const homePhotos = [
-    "live-showcase-2025-stage.webp",
-    "live-club-fair-2025-entrance.webp",
-    "live-culture-2026-stage.webp",
-    "live-spring-2025-concert.webp",
-    "live-autumn-2024-performance.webp",
-    "quality-project-hearing.webp",
-    "president-finance-training.webp",
-    "presidents-salon.webp",
+    "archive-showcase-2025-cover.webp",
+    "archive-club-fair-2025-entry.webp",
+    "archive-spring-2026-stage.webp",
+    "archive-spring-2025-piano.webp",
+    "archive-relief-2025-foam.webp",
+    "archive-guofeng-2024-opera.webp",
+    "archive-showcase-2025-camera.webp",
+    "archive-relief-2025-installation.webp",
   ];
 
   for (const photo of homePhotos) {
     assert.match(source, new RegExp(`/assets/${photo.replace(".", "\\.")}`));
   }
+
+  const homeSlidesBlock = source.match(
+    /const homeSlides: HomeSlide\[\] = \[([\s\S]*?)\n\];/,
+  );
+  assert.ok(homeSlidesBlock, "homepage slide data should exist");
+  assert.equal(
+    [...homeSlidesBlock[1].matchAll(/image: "\/assets\//g)].length,
+    8,
+    "homepage should contain exactly eight selected photos",
+  );
+  assert.match(
+    homeSlidesBlock[1],
+    /^\s*\{\s*image: "\/assets\/archive-showcase-2025-cover\.webp"/,
+    "the user-selected DSC01254 photo must remain the first cover",
+  );
 
   assert.match(source, /window\.setTimeout/);
   assert.match(source, /prefers-reduced-motion: reduce/);
@@ -153,25 +168,45 @@ test("keeps added event photos semantically paired", async () => {
   );
   assert.match(
     source,
-    /image: "\/assets\/live-culture-2026-stage\.webp"[\s\S]*?title: "春之行 · 舞台展演"/,
+    /image: "\/assets\/archive-spring-2026-stage\.webp"[\s\S]*?title: "春之行 · 舞台展演"/,
   );
   assert.match(
     source,
-    /image: "\/assets\/live-club-fair-2025-entrance\.webp"[\s\S]*?title: "百团迎新 · 校园入口"/,
+    /image: "\/assets\/archive-club-fair-2025-entry\.webp"[\s\S]*?title: "百团迎新 · 校园入口"/,
   );
   assert.match(
     source,
-    /image: "\/assets\/live-autumn-2024-performance\.webp"[\s\S]*?title: "国风雅韵 · 舞台展演"/,
+    /image: "\/assets\/archive-guofeng-2024-opera\.webp"[\s\S]*?title: "国风雅韵 · 戏曲舞台"/,
   );
 });
 
-test("archives the supplied live-gallery photos under their verified event years", async () => {
+test("archives one to three supplied photos for every identified event", async () => {
   const source = await readSiteShell();
+  const archiveBlock = source.match(
+    /const archive: Record<string, ArchiveItem\[\]> = \{([\s\S]*?)\n\};/,
+  );
+  assert.ok(archiveBlock, "archive data should exist");
+  const events = [
+    ["archive-spring-2025-", 3],
+    ["archive-relief-2025-", 3],
+    ["archive-club-fair-2025-", 3],
+    ["archive-showcase-2025-", 3],
+    ["archive-spring-2026-", 3],
+    ["archive-guofeng-2024-", 3],
+  ];
+
+  for (const [prefix, count] of events) {
+    assert.equal(
+      [...archiveBlock[1].matchAll(new RegExp(`/assets/${prefix}`, "g"))].length,
+      count,
+      `${prefix} should contribute three archive entries`,
+    );
+  }
 
   assert.match(source, /"2026": \[[\s\S]*?2026 \/ APR 01/);
   assert.match(
     source,
-    /"2025": \[[\s\S]*?2025 \/ SEP 17[\s\S]*?2025 \/ APR 02[\s\S]*?2025 \/ OCT 25/,
+    /"2025": \[[\s\S]*?2025 \/ APR 02[\s\S]*?2025 \/ MAY 28[\s\S]*?2025 \/ SEP 17[\s\S]*?2025 \/ OCT 25/,
   );
   assert.match(source, /"2024": \[[\s\S]*?2024 \/ NOV 09/);
 });
