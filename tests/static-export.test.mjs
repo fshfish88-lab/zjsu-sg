@@ -334,3 +334,13 @@ test("adds smooth, reduced-motion-safe transitions to primary content switches",
   assert.match(styles, /@keyframes preview-switch-enter/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
 });
+
+test("keeps event photos unobstructed by decorative overlays", async () => {
+  const styles = await readStyles();
+
+  assert.doesNotMatch(
+    styles,
+    /\.event-photo::after\s*\{/,
+    "event photos should not be covered by the yellow decorative block",
+  );
+});
