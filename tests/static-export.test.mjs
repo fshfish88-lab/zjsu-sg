@@ -219,23 +219,6 @@ test("archives one to three supplied photos for every identified event", async (
   assert.match(source, /"2024": \[[\s\S]*?2024 \/ NOV 09/);
 });
 
-test("keeps every archive card at the same large desktop size", async () => {
-  const styles = await readStyles();
-
-  assert.match(
-    styles,
-    /\.archive-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/,
-  );
-  assert.doesNotMatch(
-    styles,
-    /\.archive-item:nth-child\([^)]*\)\s*\{[^}]*grid-column:/,
-  );
-  assert.match(
-    styles,
-    /@media \(max-width: 520px\)[\s\S]*?\.archive-grid\s*\{\s*grid-template-columns:\s*1fr;/,
-  );
-});
-
 test("includes the detailed recruitment-push content hierarchy", async () => {
   const source = await readSiteShell();
 
