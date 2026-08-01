@@ -1524,6 +1524,32 @@ img {
   grid-column: 7 / span 5;
 }
 
+.archive-item:nth-child(7) {
+  grid-column: 1 / span 7;
+}
+
+.archive-item:nth-child(8) {
+  grid-column: 9 / span 4;
+  margin-top: 90px;
+}
+
+.archive-item:nth-child(9) {
+  grid-column: 3 / span 4;
+}
+
+.archive-item:nth-child(10) {
+  grid-column: 7 / span 6;
+  margin-top: 46px;
+}
+
+.archive-item:nth-child(11) {
+  grid-column: 1 / span 5;
+}
+
+.archive-item:nth-child(12) {
+  grid-column: 7 / span 5;
+}
+
 .archive-item img {
   width: 100%;
   aspect-ratio: 4 / 3;

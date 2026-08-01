@@ -219,6 +219,28 @@ test("archives one to three supplied photos for every identified event", async (
   assert.match(source, /"2024": \[[\s\S]*?2024 \/ NOV 09/);
 });
 
+test("continues the staggered archive layout below the first six photos", async () => {
+  const styles = await readStyles();
+  const continuedLayout = [
+    [7, "1 / span 7"],
+    [8, "9 / span 4"],
+    [9, "3 / span 4"],
+    [10, "7 / span 6"],
+    [11, "1 / span 5"],
+    [12, "7 / span 5"],
+  ];
+
+  for (const [index, columns] of continuedLayout) {
+    assert.match(
+      styles,
+      new RegExp(
+        `\\.archive-item:nth-child\\(${index}\\)\\s*\\{[^}]*grid-column:\\s*${columns.replaceAll("/", "\\/")}`,
+      ),
+      `archive photo ${index} should continue the large/small grid below`,
+    );
+  }
+});
+
 test("includes the detailed recruitment-push content hierarchy", async () => {
   const source = await readSiteShell();
 
