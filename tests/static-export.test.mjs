@@ -6,7 +6,7 @@ const routes = [
   ["index.html", "STUDENT", "让热爱发生"],
   ["about/index.html", "WHO", "我们是谁"],
   ["departments/index.html", "SIX", "六个部门"],
-  ["events/index.html", "CLUB FAIR", "百团迎新"],
+  ["events/index.html", "Club Recruitment Fair", "百团迎新"],
   ["archive/index.html", "CAMPUS", "校园档案"],
   ["join/index.html", "JOIN", "新的故事"],
 ];
@@ -134,8 +134,8 @@ test("expands the official campus work overview with matching photo stories", as
     ["百团迎新", "club-fair.webp"],
     ["社团风采节", "showcase-stage.webp"],
     ["社团文化节", "culture-festival.webp"],
-    ["社团星级评定", "star-club-review.webp"],
-    ["新社团成立", "new-club-establishment.webp"],
+    ["星级社团评定", "star-club-review.webp"],
+    ["新社团成立评审", "new-club-establishment.webp"],
     ["精品活动立项", "quality-project-hearing.webp"],
     ["七星社长评选", "team-honors.webp"],
   ];
@@ -160,7 +160,7 @@ test("keeps added event photos semantically paired", async () => {
   );
   assert.match(
     source,
-    /name: "新社团成立"[\s\S]*?image: "\/assets\/new-club-establishment\.webp"/,
+    /name: "新社团成立评审"[\s\S]*?image: "\/assets\/new-club-establishment\.webp"/,
   );
   assert.match(
     source,
@@ -261,6 +261,25 @@ test("uses the official names and WeChat references for added events", async () 
   assert.match(source, /NKRAyOcY-hg6igbNU3EKaw/);
   assert.match(source, /jpJ4v2e92OdXTs1vpUutZQ/);
   assert.match(source, /gxF6TlI9heCmiey8aMbzgw/);
+});
+
+test("uses the approved English names for the primary events", async () => {
+  const source = await readSiteShell();
+  const requestedNames = [
+    ["百团迎新", "Club Recruitment Fair"],
+    ["社团文化节", "Club Culture Festival"],
+    ["星级社团评定", "Star-Rated Club Evaluation"],
+    ["新社团成立评审", "New Club Establishment Review"],
+    ["精品活动立项", "Premier Club Activity Program"],
+  ];
+
+  for (const [name, englishName] of requestedNames) {
+    assert.match(
+      source,
+      new RegExp(`name: "${name}"[\\s\\S]*?en: "${englishName}"`),
+      `${name} should use the approved English event name`,
+    );
+  }
 });
 
 test("links every department to its matching official recruitment article", async () => {

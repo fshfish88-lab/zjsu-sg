@@ -352,7 +352,7 @@ const departments: Department[] = [
 const events: EventItem[] = [
   {
     name: "百团迎新",
-    en: "CLUB FAIR",
+    en: "Club Recruitment Fair",
     date: "ANNUAL / AUTUMN",
     image: "/assets/club-fair.webp",
     description:
@@ -368,7 +368,7 @@ const events: EventItem[] = [
   },
   {
     name: "社团文化节",
-    en: "CULTURE FESTIVAL",
+    en: "Club Culture Festival",
     date: "2026 / SPRING",
     image: "/assets/culture-festival.webp",
     description:
@@ -376,15 +376,15 @@ const events: EventItem[] = [
   },
   {
     name: "星级社团评定",
-    en: "STAR CLUB REVIEW",
+    en: "Star-Rated Club Evaluation",
     date: "ANNUAL / REVIEW",
     image: "/assets/star-club-review.webp",
     description:
       "围绕规范运营、活动质量与文化影响力开展年度评价，挖掘认真耕耘的优秀社团，也为持续成长提供清晰方向。",
   },
   {
-    name: "新社团成立",
-    en: "NEW CLUB REVIEW",
+    name: "新社团成立评审",
+    en: "New Club Establishment Review",
     date: "ANNUAL / ESTABLISHMENT",
     image: "/assets/new-club-establishment.webp",
     description:
@@ -392,7 +392,7 @@ const events: EventItem[] = [
   },
   {
     name: "精品活动立项",
-    en: "QUALITY PROJECT HEARING",
+    en: "Premier Club Activity Program",
     date: "2025 / MAY 11",
     image: "/assets/quality-project-hearing.webp",
     description:
@@ -535,7 +535,7 @@ const archive: Record<string, ArchiveItem[]> = {
 const aboutActivities = [
   {
     name: "百团迎新",
-    en: "CLUB FAIR",
+    en: "Club Recruitment Fair",
     image: "/assets/club-fair.webp",
     description:
       "百余个学生社团集中亮相，通过展位展示、互动体验和现场交流，让新生快速认识校园社团、找到兴趣伙伴。",
@@ -549,28 +549,28 @@ const aboutActivities = [
   },
   {
     name: "社团文化节",
-    en: "CULTURE FESTIVAL",
+    en: "Club Culture Festival",
     image: "/assets/culture-festival.webp",
     description:
       "以主题市集、社团体验和创意互动连接校园文化，让同学在参与中走近社团、感受多元文化。",
   },
   {
-    name: "社团星级评定",
-    en: "STAR CLUB REVIEW",
+    name: "星级社团评定",
+    en: "Star-Rated Club Evaluation",
     image: "/assets/star-club-review.webp",
     description:
       "经社团自主申报、材料审核和现场评审，结合规范运营、活动质量与文化影响力形成年度评价，为社团成长提供清晰方向。",
   },
   {
-    name: "新社团成立",
-    en: "NEW CLUB REVIEW",
+    name: "新社团成立评审",
+    en: "New Club Establishment Review",
     image: "/assets/new-club-establishment.webp",
     description:
       "通过成立申请、材料审核、现场陈述与答辩评审，帮助新社团厘清组织定位、完善运行规范，让新的兴趣共同体稳健启程。",
   },
   {
     name: "精品活动立项",
-    en: "QUALITY PROJECTS",
+    en: "Premier Club Activity Program",
     image: "/assets/quality-project-hearing.webp",
     description:
       "通过项目申报、评审和跟进培育，为高质量社团文化活动提供支持，推动特色项目沉淀为校园文化品牌。",
